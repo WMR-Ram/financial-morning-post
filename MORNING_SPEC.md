@@ -180,8 +180,11 @@
 - 表格：**禁止给表格设统一 `min-width`**（旧周报版一刀切 620px 会把两列表撑破卡片网格）。
   `ticker.js` 会给每张表包 `.tscroll`、从表头文字写入 `data-label`，并对**列数 ≥3 的表**标 `data-stack="1"`，
   窄屏 CSS 渲染成"一行一卡、行内两列网格"。因此**每张表必须有 `<thead>` 且表头文字要短**（`check.js` 会校验 thead 数量）。
-- 图例统一画在图顶部并自动换行；折线图不在右端贴长序列名；标签多的图显式传 `minPer`（bar 34 / group 76 / line 56）。
-  容器放不下时图会自动放大并横向滚动＋插入 `.chart-hint`；不要为"看着不截断"而缩小标签或删提示。
+- 图例统一画在图顶部并自动换行；折线图不在右端贴长序列名。**图表一律不许出现滚动条（2026-11-02 定稿）**：
+  `chart.js` 让 svg 宽度永远等于容器宽度、容器 `overflow:hidden`、高度由图表自算；
+  类目带宽不足（`fwBar` 小于 `minPer`，默认 46；`fwGroup` 小于 72px）时**自动改横向条形图**，图变高但不滚动；
+  `fwLine` 按容器宽度抽稀 x 轴刻度（每刻度 ≥62px）。**不要加 `.chart-hint`，不要靠缩字号硬塞，也不要改回"放大＋横滚"**
+  （旧方案的 `overflow-x:auto` 会连带把 `overflow-y` 变成 auto，因而冒出竖向滚动条，用户已明确反对）。
 - **改过 `assets/` 下任何文件，必须把全站 HTML 的资源查询串 `?v=YYYY-MM-DDx` 递增一位且全页一致**，
   否则 GitHub Pages 与手机浏览器吃旧缓存，修复看起来"没生效"。
 - 行情条自适应轮询：盘中约 8 秒、非盘中约 90 秒、连续失败指数退避至多 8 倍，页面隐藏时暂停；
@@ -193,7 +196,7 @@
 1. `node E:/financial-morning-post/assets/check.js E:/financial-morning-post` 全绿（含篇幅 1200—2600 字、图表 ≤3、每表有 `<thead>`）。
 2. 浏览器实测（本地 `file://` ＋线上一遍）：
    - `document.documentElement.scrollWidth === clientWidth`（页面不得横向溢出）；
-   - 每张被截断的图都有 `.chart-hint`，未截断的不该有；
+   - **每张 `.chart` 都不得有滚动条**：`el.scrollWidth - el.clientWidth === 0` 且 `el.scrollHeight - el.clientHeight === 0`；页面不该出现 `.chart-hint`；
    - `table[data-stack="1"]` 数量 = 列数 ≥3 的表数量；1—2 列表 `min-width` 为 `0px`；
    - 行情条 `mode.live` 数量 >0（东财失败时腾讯要能独自供数）；
    - 控制台只允许出现已知的公开接口偶发 `ERR_EMPTY_RESPONSE`，且不影响显示。
