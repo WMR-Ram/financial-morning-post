@@ -139,8 +139,10 @@ a sup { color: var(--blue); }
 #src ol { padding-left: 26px; }
 #src li { margin-bottom: 6px; word-break: break-all; }
 
-/* 图 */
-.chart { height: 300px; margin: 8px 0 4px; }
+/* 图：高度由 chart.js 按内容设定（横向条形会自动变高），容器一律 overflow:hidden。
+   旧版固定 300px + 脚本设 overflow-x:auto，会让浏览器把 overflow-y 也算成 auto，
+   于是图右侧冒出一根竖向滚动条（2026-11-02 用户截图指出）。现在不许出现任何滚动条。 */
+.chart { height: auto; min-height: 220px; margin: 8px 0 4px; overflow: hidden; }
 .chart-note { font-size: 11.5px; color: var(--txt-3); }
 
 /* 脚注 */
@@ -170,8 +172,8 @@ footer.pager a:hover { border-color: var(--acc); color: var(--txt); text-decorat
   .wrap { padding: 24px 18px 64px; }
 }
 @media (max-width: 860px) {
-  .g2, .g3 { grid-template-columns: 1fr; }
-  .g4 { grid-template-columns: repeat(2, 1fr); }
+  .g2, .g3 { grid-template-columns: minmax(0, 1fr); }
+  .g4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   body { font-size: 14.5px; }
   .wrap { padding: 18px 13px 54px; }
   .masthead .inner, .ticker .inner, .tickmeta { padding-left: 13px; padding-right: 13px; }
@@ -186,7 +188,7 @@ footer.pager a:hover { border-color: var(--acc); color: var(--txt); text-decorat
   .ticker .grp { gap: 22px; padding: 9px 22px 9px 13px; }
   .card { padding: 13px 14px; }
   .metric { font-size: 19px; }
-  .chart { height: 260px; }
+  .chart { min-height: 200px; }
   table { font-size: 13px; }
   th, td { padding: 7px 8px; }
   .wk .row { font-size: 11.5px; gap: 10px; }
@@ -218,6 +220,13 @@ footer.pager a:hover { border-color: var(--acc); color: var(--txt); text-decorat
     font-size: 13px; margin-bottom: 5px; padding-bottom: 5px; border-bottom: 1px solid var(--line);
   }
   table[data-stack="1"] td.num { font-family: var(--mono); }
+  /* 堆叠单元格的值是唯一弹性子项：不给 min-width:0 与换行约束时，
+     长句和 [n] 上标会把卡片撑宽、进而撑破文档宽度（窄屏横向溢出）。 */
+  table[data-stack="1"] td > * { min-width: 0; overflow-wrap: anywhere; }
+  table[data-stack="1"] td { overflow-wrap: anywhere; }
+  /* grid/flex 子项默认 min-width:auto，长内容会把轨道撑到超过容器；必须显式收到 0。 */
+  table[data-stack="1"] tr > * { min-width: 0; }
+  .card > *, .lead, .chart-note { overflow-wrap: anywhere; }
   /* 未堆叠的窄表（1—2 列）：自然换行，不强制宽度 */
   .tscroll table { min-width: 0; }
   .tscroll { overflow-x: visible; }

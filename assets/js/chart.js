@@ -3,12 +3,15 @@
  * fwGroup(el, cfg) 多期分组柱（近1周/1月/3月/1年）
  * fwLine(el, cfg)  折线（多序列，带图例）
  *
- * 移动端修订（2026-11-02）：
- *  - 图例改为顶部自动换行。旧版按名字长度横向累加，窄屏必然溢出画布外——这就是"图例显示异常"的根因。
- *  - 折线图不再在右端贴序列名（会被裁掉），统一用顶部图例，末端只留短名。
- *  - 内容宽度不足时按最小可读宽度渲染，容器 .chart 转为横向滚动，不靠缩字号硬塞。
- *  - 注册 resize 重绘：横屏、窗口缩放、手机地址栏收起后按新宽度重画。
- *  cfg 可选：minPer（每柱最小像素）、maxBar、axisDigits、suffix、zeroBase、baseline。
+ * 2026-11-02 第二次移动端修订（用户明确要求：**不许出现滚动条**）：
+ *  - 旧版"宽度不够就放大 svg + 容器横向滚动"作废。overflow-x:auto 会连带把 overflow-y 变成 auto，
+ *    于是固定 300px 高的 .chart 里冒出一根竖向滚动条（用户截图指出的就是这个）。
+ *  - 现在：svg 宽度永远等于容器宽度，容器 overflow:hidden，容器高度由图表自己算。
+ *  - 竖排放不下（每个类目带宽 < 阈值）时，**自动改成横向条形图**：类目标签在左侧完整显示，
+ *    条形从中线向两侧延伸，数值写在条端。类目再多也只是把图变高，不需要滑动。
+ *  - 折线图按容器宽度自动抽稀 x 轴刻度（保证每个刻度有 ~62px），不靠横向滚动硬塞。
+ *  - 图例仍在顶部自动换行；注册 resize 重绘。
+ *  cfg 可选：minPer、maxBar、axisDigits、suffix、zeroBase、baseline、height、pad、horizontal(true 强制横排)。
  */
 (function () {
   "use strict";
@@ -27,27 +30,42 @@
     t.textContent = str;
     return t;
   }
-  function minWidth(n, per) { return Math.max(340, (n + 1) * per); }
+  function scale(dmin, dmax, rmin, rmax) {
+    var span = (dmax - dmin) || 1;
+    return function (v) { return rmin + (v - dmin) / span * (rmax - rmin); };
+  }
+  function nice(a, b) {
+    var min = Math.min(a, b), max = Math.max(a, b), pad = (max - min) * 0.12 || 1;
+    return [min - pad, max + pad];
+  }
+  /* 可用宽度：与 host() 用同一套兜底，避免"按 900 判定放得下、实际只有 320"的错判 */
+  function availW(el) {
+    var cw = Math.floor(el.getBoundingClientRect().width) || el.clientWidth ||
+      document.documentElement.clientWidth || 0;
+    return cw < 240 ? 320 : cw;
+  }
+  /* 类目标签宽度：中文按每字约 fs 像素估，留 10px 余量，最少 56 最多 128 */
+  function labelW(labels, fs) {
+    var mx = 0;
+    labels.forEach(function (l) { mx = Math.max(mx, String(l == null ? "" : l).length); });
+    return Math.max(56, Math.min(128, Math.round(mx * fs) + 10));
+  }
 
-  function host(el, cfg, minW) {
-    var cw = Math.ceil(el.getBoundingClientRect().width) || el.clientWidth || document.documentElement.clientWidth || 900;
-    var w = Math.max(cw, minW || 0);
-    var h = cfg.height || 300;
+  /* 建画布：宽度永远 = 容器宽度；容器高度按 cfg 或横向布局算出的 h 设定，杜绝任何滚动条 */
+  function host(el, cfg, forcedH) {
+    var cw = Math.floor(el.getBoundingClientRect().width) || el.clientWidth ||
+      document.documentElement.clientWidth || 900;
+    if (cw < 240) cw = 320;
+    var w = cw;
+    var h = forcedH || cfg.height || 300;
     el.innerHTML = "";
-    el.style.overflowX = w > cw + 2 ? "auto" : "hidden";
-    el.style.webkitOverflowScrolling = "touch";
+    el.style.overflow = "hidden";
+    el.style.height = h + "px";
     var svg = s("svg", { viewBox: "0 0 " + w + " " + h, width: w, height: h, "font-family": "sans-serif" });
+    svg.style.display = "block";   /* 去掉 inline 基线留白，免得容器 scrollHeight 比 svg 高 7px */
     el.appendChild(svg);
-    /* 需要横向滚动时给一个提示，免得用户以为图被截断了 */
     var sib = el.parentNode.querySelector(".chart-hint");
-    if (w > cw + 2) {
-      if (!sib) {
-        sib = document.createElement("div");
-        sib.className = "chart-hint";
-        sib.textContent = "← 图表可左右滑动 →";
-        el.parentNode.insertBefore(sib, el.nextSibling);
-      }
-    } else if (sib) { sib.parentNode.removeChild(sib); }
+    if (sib) sib.parentNode.removeChild(sib);   /* 不再需要"可左右滑动"提示 */
     return {
       svg: svg, w: w, h: h, narrow: w < 560,
       pad: Object.assign({ t: 18, r: 16, b: 42, l: 46 }, cfg.pad || {}),
@@ -69,17 +87,74 @@
     return rows * rowH + 12;
   }
 
-  function scale(dmin, dmax, rmin, rmax) {
-    var span = (dmax - dmin) || 1;
-    return function (v) { return rmin + (v - dmin) / span * (rmax - rmin); };
-  }
-  function nice(a, b) {
-    var min = Math.min(a, b), max = Math.max(a, b), pad = (max - min) * 0.12 || 1;
-    return [min - pad, max + pad];
+  /* ============ 横向条形（放得下就不滑动的主力布局） ============
+   * rows: [{label, bars:[{v,color,name}]}]；从中线向两侧画，数值写在条端。 */
+  function hBars(el, cfg, rows) {
+    var narrow = availW(el) < 560;
+    var fs = narrow ? 10 : 11;
+    var rowH = narrow ? 26 : 30;
+    var headH = 30, footH = 26;
+    var labels = rows.map(function (r) { return r.label; });
+    var lw = labelW(labels, fs);
+    var gutter = fs * 5.4;                       /* 数值文字留位 */
+    var h = rows.length * rowH + headH + footH;
+    var c = host(el, cfg, h);
+    var P = { l: 6, r: 10, t: headH, b: footH };
+    var innerW = Math.max(60, c.w - lw - gutter - 16);
+    var maxPos = 0, maxNeg = 0;
+    rows.forEach(function (r) { r.bars.forEach(function (b) {
+      if (b.v >= 0) maxPos = Math.max(maxPos, b.v); else maxNeg = Math.max(maxNeg, -b.v);
+    }); });
+    if (cfg.span) { maxPos = Math.max(maxPos, cfg.span[0]); maxNeg = Math.max(maxNeg, cfg.span[1]); }
+    var span = (maxPos + maxNeg) || 1;
+    var zeroX = lw + (maxNeg / span) * innerW;
+    var unit = innerW / span;
+    var dg = cfg.digits === undefined ? 2 : cfg.digits;
+    var sfx = cfg.suffix || "%";
+
+    /* 中线与刻度 */
+    s("line", { x1: zeroX, x2: zeroX, y1: P.t - 8, y2: c.h - footH + 4, stroke: "#3a4763" }, c.svg);
+    [-maxNeg, -maxNeg / 2, maxPos / 2, maxPos].forEach(function (gv) {
+      var gx = zeroX + gv * unit;
+      s("line", { x1: gx, x2: gx, y1: P.t - 8, y2: c.h - footH + 4, stroke: GRID, "stroke-dasharray": "3 4" }, c.svg);
+      txt(c.svg, gx, c.h - 8, (gv > 0 ? "+" : "") + gv.toFixed(cfg.axisDigits === undefined ? 1 : cfg.axisDigits) + sfx,
+        { "font-size": fs - 1, "text-anchor": "middle" });
+    });
+
+    rows.forEach(function (r, i) {
+      var top = P.t + i * rowH;
+      var mid = top + rowH / 2;
+      txt(c.svg, 2, mid + 4, r.label, { "font-size": fs, fill: "#d7dee9", "font-weight": 700 });
+      var sn = r.bars.length;
+      var bw = Math.max(4, Math.min(cfg.maxBar || 20, (rowH - 6) / sn));
+      r.bars.forEach(function (b, k) {
+        var y0 = mid - (sn * bw) / 2 + k * bw;
+        var len = Math.abs(b.v) * unit;
+        var x0 = b.v >= 0 ? zeroX : zeroX - len;
+        var rect = s("rect", { x: x0, y: y0 + 1, width: Math.max(1.5, len), height: Math.max(3, bw - 2), fill: b.color, rx: 2, opacity: .92 }, c.svg);
+        s("title", {}, rect).textContent = r.label + (b.name ? " · " + b.name : "") + " " + (b.v > 0 ? "+" : "") + b.v.toFixed(dg) + sfx;
+        var lx = b.v >= 0 ? x0 + len + 3 : x0 - 3;
+        txt(c.svg, lx, y0 + bw / 2 + 3.5, (b.v > 0 ? "+" : "") + b.v.toFixed(dg) + sfx, {
+          "font-size": fs - 1, "font-weight": 700, fill: b.color,
+          "text-anchor": b.v >= 0 ? "start" : "end"
+        });
+      });
+      if (i) s("line", { x1: 2, x2: c.w - 2, y1: top, y2: top, stroke: "#141b28" }, c.svg);
+    });
+    return c;
   }
 
   function fwBar(el, cfg) {
-    var c = host(el, cfg, minWidth(cfg.values.length, cfg.minPer || 34));
+    var n = cfg.values.length;
+    var cw = availW(el);
+    var band = (cw - 62) / n;
+    /* 带宽不够写竖排类目标签（或 cfg.horizontal）→ 改横向条形，绝不滚动 */
+    if (cfg.horizontal || band < (cfg.minPer || 46)) {
+      return hBars(el, cfg, cfg.labels.map(function (lb, i) {
+        return { label: lb, bars: [{ v: cfg.values[i], color: cfg.colors ? cfg.colors[i] : (cfg.values[i] >= 0 ? UP : DOWN) }] };
+      }));
+    }
+    var c = host(el, cfg);
     c.pad.t += legend(c, cfg.series);
     var P = c.pad, innerW = c.w - P.l - P.r, vals = cfg.values;
     var range = cfg.zeroBase === false
@@ -87,16 +162,16 @@
       : nice(Math.min(0, Math.min.apply(null, vals)), Math.max(0, Math.max.apply(null, vals)));
     var y = scale(range[0], range[1], c.h - P.b, P.t);
     var zero = y(0), dg = cfg.digits === undefined ? 2 : cfg.digits;
-    var band = innerW / vals.length;
-    if (band < 52) P.b = Math.max(P.b, 54);
+    var band2 = innerW / vals.length;
+    if (band2 < 52) P.b = Math.max(P.b, 56);
     for (var g = 0; g <= 4; g++) {
       var gv = range[0] + (range[1] - range[0]) * g / 4, gy = y(gv);
       s("line", { x1: P.l, x2: c.w - P.r, y1: gy, y2: gy, stroke: GRID, "stroke-dasharray": gv === 0 ? "" : "3 4" }, c.svg);
       txt(c.svg, 4, gy + 4, gv.toFixed(cfg.axisDigits === undefined ? 1 : cfg.axisDigits) + (cfg.suffix || ""), { "font-size": c.fs - 1 });
     }
-    var bw = Math.min(cfg.maxBar || 46, band * 0.62), rotate = band < 52;
+    var bw = Math.min(cfg.maxBar || 46, band2 * 0.62), rotate = band2 < 52;
     vals.forEach(function (v, i) {
-      var cx = P.l + band * (i + 0.5);
+      var cx = P.l + band2 * (i + 0.5);
       var top = v >= 0 ? y(v) : zero, hgt = Math.abs(y(v) - zero);
       var col = cfg.colors ? cfg.colors[i] : (v >= 0 ? UP : DOWN);
       var bar = s("rect", { x: cx - bw / 2, y: top, width: bw, height: Math.max(1.5, hgt), fill: col, rx: 2, opacity: .9 }, c.svg);
@@ -111,7 +186,15 @@
   }
 
   function fwGroup(el, cfg) {
-    var c = host(el, cfg, minWidth(cfg.labels.length, 76));
+    var cw = availW(el);
+    var gw = (cw - 62) / cfg.labels.length;
+    if (cfg.horizontal || gw < 72) {
+      var pal = cfg.series.map(function (sr) { return sr.color; });
+      return hBars(el, Object.assign({ maxBar: 12 }, cfg), cfg.labels.map(function (lb, i) {
+        return { label: lb, bars: cfg.series.map(function (sr, k) { return { v: sr.values[i], color: pal[k], name: sr.name }; }) };
+      }));
+    }
+    var c = host(el, cfg);
     c.pad.t += legend(c, cfg.series);
     var P = c.pad, innerW = c.w - P.l - P.r, all = [];
     cfg.series.forEach(function (sr) { sr.values.forEach(function (v) { all.push(v); }); });
@@ -123,25 +206,25 @@
       txt(c.svg, 4, gy + 4, gv.toFixed(0) + "%", { "font-size": c.fs - 1 });
     }
     var groups = cfg.labels.length, sn = cfg.series.length;
-    var gw = innerW / groups, bw = Math.min(18, (gw * 0.74) / sn);
-    if (gw < 62) P.b = Math.max(P.b, 52);
+    var gw2 = innerW / groups, bw = Math.min(18, (gw2 * 0.74) / sn);
+    if (gw2 < 62) P.b = Math.max(P.b, 52);
     cfg.labels.forEach(function (lb, i) {
-      var gx = P.l + gw * (i + 0.5);
+      var gx = P.l + gw2 * (i + 0.5);
       cfg.series.forEach(function (sr, k) {
         var v = sr.values[i], cx = gx + (k - (sn - 1) / 2) * bw;
         var r = s("rect", { x: cx - bw / 2 + 1, y: v >= 0 ? y(v) : y(0), width: Math.max(3, bw - 2), height: Math.max(1.2, Math.abs(y(v) - y(0))), fill: sr.color, rx: 1.5 }, c.svg);
         s("title", {}, r).textContent = lb + " · " + sr.name + " " + (v > 0 ? "+" : "") + v.toFixed(2) + "%";
       });
       var ly = c.h - P.b + 16;
-      var t = txt(c.svg, gx, ly, lb, { "text-anchor": gw < 62 ? "end" : "middle", "font-size": c.fs });
-      if (gw < 62) t.setAttribute("transform", "rotate(-32 " + gx + " " + ly + ")");
+      var t = txt(c.svg, gx, ly, lb, { "text-anchor": gw2 < 62 ? "end" : "middle", "font-size": c.fs });
+      if (gw2 < 62) t.setAttribute("transform", "rotate(-32 " + gx + " " + ly + ")");
     });
     return c;
   }
 
   function fwLine(el, cfg) {
     var n = cfg.series[0].values.length;
-    var c = host(el, cfg, minWidth(n, 56));
+    var c = host(el, cfg);
     c.pad = Object.assign({ t: 20, r: 20, b: 34, l: 46 }, cfg.pad || {});
     c.pad.t += legend(c, cfg.series);
     var P = c.pad, innerW = c.w - P.l - P.r, all = [];
@@ -154,8 +237,11 @@
       s("line", { x1: P.l, x2: c.w - P.r, y1: gy, y2: gy, stroke: GRID, "stroke-dasharray": "3 4" }, c.svg);
       txt(c.svg, 4, gy + 4, gv.toFixed(cfg.digits === undefined ? 1 : cfg.digits), { "font-size": c.fs - 1 });
     }
+    /* 刻度按容器宽度抽稀：每个刻度至少 62px，末点始终标注——放不下就少标，而不是滚动 */
+    var step = Math.max(1, Math.ceil(n / Math.max(2, Math.floor(innerW / 62))));
     (cfg.xLabels || []).forEach(function (lb, i) {
       if (lb === undefined) return;
+      if (i % step !== 0 && i !== n - 1) return;
       txt(c.svg, x(i), c.h - P.b + 16, c.narrow && String(lb).length > 7 ? String(lb).slice(-5) : lb, { "text-anchor": "middle", "font-size": c.fs - 1 });
     });
     if (cfg.baseline !== undefined) {
