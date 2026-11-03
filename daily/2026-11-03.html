@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title>财经早报 · 2026-11-03</title>
-<link rel="stylesheet" href="../assets/css/theme.css?v=2026-11-02b">
+<link rel="stylesheet" href="../assets/css/theme.css?v=2026-11-03c">
 <style>
   .ev { font-family: var(--mono); font-size: 10.5px; padding: 0 6px; border-radius: 3px; border: 1px solid var(--line); margin-left: 6px; white-space: nowrap; }
   .ev.you { color: var(--down); border-color: #1d4b3a; }
@@ -220,6 +220,7 @@
   <h2><span class="no">07</span>持仓关联提示</h2>
   <p><b>中证A500（000510）</b>：涨 1.07%、主力净流入 45.88 亿，但探针 159338 同期流出 0.17 亿，申赎口径没有承接证据<sup>[1]</sup><sup>[2]</sup>。</p>
   <p><b>中证红利低波（H30269）</b>：跌 0.61%，持仓中唯一收跌的 A 股线；拥挤度是主矛盾，隔夜油价下跌再添一层压力<sup>[1]</sup><sup>[21]</sup>。</p>
+  <p><b>标普中国A股大盘红利低波50（SPCLLHCP）</b>：同族另一条红利线，11-02 <b>跌 0.14%</b>（代理收盘 1.472，10-30 为 1.474），<b>比中证红利低波的 -0.61% 抗跌</b>；上一周（10-23→10-30）+3.37%，弱于中证红利低波的 +3.90%<sup>[26]</sup>。两条线样本与权重不重合（50 只、股息率与波动率双筛 vs 中证红利低波 100 只），所以同日同向但幅度不同，这恰是"红利"内部的分化信号<sup>[26]</sup>。<span class="tag-verify" title="待核">⚠️</span> 指数原值当日涨跌未取证（标普官网页抓取返回 403），此处用跟踪 ETF 515450 的二级收盘价代理，含费用与折溢价。</p>
   <p><b>科创50（000688）</b>：涨 3.11%，只收复 10-30 跌幅 5.48% 的一半；直接暴露于隔夜费城半导体的弱势<sup>[1]</sup><sup>[15]</sup>。</p>
   <p><b>纳斯达克100（NDX）</b>：跌 1.39%，连续第二日走弱；苹果盘后跌逾 3%，今夜权重股方向未定<sup>[3]</sup><sup>[18]</sup>。</p>
   <p><b>539002 建信新兴市场混合(QDII)A</b>：主动型新兴市场 QDII，不跟踪纳指，前十集中在台韩存储与代工、美股光模块与存储链。净值停在 10-30 的 2.0900（跌 6.36%），上期预估的下行已兑现；QDII 净值滞后，11-02 海外同类仍跌，下一份承压属口径推断<sup>[3]</sup><sup>[25]</sup>。现货可核值停在 11-02<sup>[20]</sup>。</p>
@@ -255,10 +256,12 @@
       <li>新华财经 11月解禁规模 · 2026-11-02 https://www.cnfin.com/yw-lb/detail/20261102/4489492_1.html </li>
       <li>中财网 新股日历 · 2026-11-03 https://newstock.cfi.cn/ </li>
       <li>东方财富 天天基金 净值序列 · 2026-11-03 https://api.fund.eastmoney.com/f10/lsjz?fundCode=019018 ；539002 同接口 </li>
+      <li>东方财富 日线接口（标普红利低波50 代理 515450 与中证红利低波 H30269 逐日收盘）· 2026-11-03 https://push2his.eastmoney.com/api/qt/stock/kline/get?secid=1.515450&amp;klt=101&amp;lmt=12 ；https://push2his.eastmoney.com/api/qt/stock/kline/get?secid=2.H30269&amp;klt=101&amp;lmt=12 ；标普官网指数页（抓取返回 403，未能取指数原值） https://www.spglobal.com/spdji/zh/indices/dividends-factors/sp-china-a-share-largecap-low-volatility-high-dividend-50-index/ </li>
     </ol>
     <h3>待核清单</h3>
     <ul class="tight">
       <li>回购增持再贷款转长期、利率降至 1.00% 仅媒体转述，官方通知全文未查到。</li>
+      <li>标普红利低波50（SPCLLHCP）指数原值：官网页对抓取返回 403、东财与且慢均无该指数日频行情，本期只能用 515450 二级收盘价代理；后续需用官网 factsheet 或媒体口径复核日涨跌与折溢价差。</li>
       <li>美国 10 月 ISM 制造业 PMI 头条值未取证，仅有分项。</li>
       <li>Marvell 约 1150 亿美元收购 Lumentum 暂为单源，待双方公告。</li>
       <li>布伦特原油跌幅口径冲突：早餐记 7.63%、每经记跌 2% 报 111.14 美元，本期取后者。</li>
@@ -282,8 +285,8 @@
 
 </div>
 
-<script src="../assets/js/chart.js?v=2026-11-02b"></script>
-<script src="../assets/js/ticker.js?v=2026-11-02b"></script>
+<script src="../assets/js/chart.js?v=2026-11-03c"></script>
+<script src="../assets/js/ticker.js?v=2026-11-03c"></script>
 <script>
 /* 快照为 2026-11-02（上一交易日）收盘值；行情条轮询覆盖 11-03 实时值 */
 window.FW_TICK = [
@@ -296,6 +299,7 @@ window.FW_TICK = [
   {name:"创业板",   em:"0.399006", tc:"sz399006", dec:2, snapshot:{price:2458.70, pct:1.87}},
   {name:"中证红利", em:"1.000922", tc:"sh000922", dec:2, snapshot:{price:5587.66, pct:-0.09}},
   {name:"红利低波", em:"2.H30269",               dec:2, snapshot:{price:11310.84, pct:-0.61}},
+  {name:"标普红利低波50", em:"1.515450",         dec:3, snapshot:{price:1.472, pct:-0.14}},
   {name:"恒生",     em:"124.HSI",  tc:"hkHSI",   dec:2, snapshot:{price:23393.32, pct:0.42}},
   {name:"纳指100",  tc:"usNDX",                  dec:2, snapshot:{price:27989.82, pct:-1.39}},
   {name:"纳指综合", tc:"usIXIC",                 dec:2, snapshot:{price:25164.36, pct:-1.07}},
