@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>财经早报 · 2026-11-03</title>
+<link rel="stylesheet" href="../assets/css/theme.css?v=2026-11-02b">
+<style>
+  .ev { font-family: var(--mono); font-size: 10.5px; padding: 0 6px; border-radius: 3px; border: 1px solid var(--line); margin-left: 6px; white-space: nowrap; }
+  .ev.you { color: var(--down); border-color: #1d4b3a; }
+  .ev.tui { color: var(--acc); border-color: #4a3a1a; }
+  .ev.wei { color: var(--txt-3); }
+  .chain { counter-reset: c; margin: 0; padding: 0; list-style: none; }
+  .chain li { position: relative; padding: 0 0 10px 32px; margin: 0 0 0 11px; border-left: 1px dashed var(--line); font-size: 14px; }
+  .chain li:last-child { border-left: 0; }
+  .chain li::before { counter-increment: c; content: counter(c); position: absolute; left: -11px; top: 2px; width: 21px; height: 21px;
+    border-radius: 50%; background: var(--card-2); border: 1px solid var(--acc); color: var(--acc);
+    font-family: var(--mono); font-size: 11px; text-align: center; line-height: 20px; }
+  .three { display: flex; gap: 10px; align-items: baseline; font-size: 15px; margin-bottom: 10px; }
+  .three .n { font-family: var(--mono); color: var(--acc); font-size: 12px; flex: 0 0 22px; }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="inner">
+    <div class="brand">财经<span>早报</span></div>
+    <div class="issue">2026-11-03 第 002 期 · 盘前短报</div>
+    <div class="stamp">构建 <b>2026-11-03 09:00</b> · 复盘区间 <b>2026-11-02</b></div>
+  </div>
+</header>
+
+<nav class="toc">
+  <a href="#s0">00 三条</a>
+  <a href="#s1">01 复盘</a>
+  <a href="#s2">02 资金</a>
+  <a href="#s3">03 板块</a>
+  <a href="#s4">04 海外</a>
+  <a href="#s5">05 政策</a>
+  <a href="#s6">06 推演</a>
+  <a href="#s7">07 持仓</a>
+  <a href="#src">08 免责</a>
+</nav>
+
+<div class="ticker"><div class="track" id="ticker-strip"></div></div>
+<div class="tickmeta"><span id="ticker-meta"></span></div>
+
+<div class="wrap">
+
+<section id="s0">
+  <h2><span class="no">00</span>今日三条</h2>
+  <p class="lead">复盘区间为 2026-11-02 收盘；当日未开盘，不含盘中读数。</p>
+  <div class="three"><span class="n">1</span><span>昨天是高低切换的反弹：4681 只上涨、涨停 125 家，红利低波却跌 0.61%、银行跌 0.90%，钱从拥挤高股息换到超跌科技<sup>[7]</sup><sup>[8]</sup>。 → §01</span></div>
+  <div class="three"><span class="n">2</span><span>政策给方向不给细则：11-02 央行会同金监总局、证监会开两场座谈会，再贷款拟转为长期制度性安排、利率降至 1.00%，通知全文未见<sup>[16]</sup><sup>[17]</sup>。 → §05</span></div>
+  <div class="three"><span class="n">3</span><span>外部变量比昨日反弹更要紧：纳指100 跌 1.39%、费城半导体跌逾 3%，苹果营收增 12% 却因指引下修盘后跌逾 3%<sup>[13]</sup><sup>[15]</sup><sup>[18]</sup>。 → §04</span></div>
+</section>
+
+<section id="s1">
+  <h2><span class="no">01</span>上一交易日复盘（2026-11-02）</h2>
+  <p class="lead">宽基全线收红、红利线收跌，成交额同步放大，属放量分化反弹。</p>
+  <table>
+    <thead><tr><th>指数</th><th>收盘</th><th>涨跌</th></tr></thead>
+    <tbody>
+      <tr><td>上证指数</td><td class="num">3638.03</td><td class="num up">+1.08%</td></tr>
+      <tr><td>深证成指</td><td class="num">11010.68</td><td class="num up">+1.63%</td></tr>
+      <tr><td>沪深300</td><td class="num">4016.92</td><td class="num up">+0.79%</td></tr>
+      <tr><td>中证A500</td><td class="num">4844.36</td><td class="num up">+1.07%</td></tr>
+      <tr><td>科创50</td><td class="num">1196.94</td><td class="num up">+3.11%</td></tr>
+      <tr><td>创业板指</td><td class="num">2458.70</td><td class="num up">+1.87%</td></tr>
+      <tr><td>中证红利</td><td class="num">5587.66</td><td class="num down">-0.09%</td></tr>
+      <tr><td>红利低波</td><td class="num">11310.84</td><td class="num down">-0.61%</td></tr>
+      <tr><td>中证银行</td><td class="num">7890.44</td><td class="num down">-0.90%</td></tr>
+      <tr><td>恒生指数</td><td class="num">23393.32</td><td class="num up">+0.42%</td></tr>
+    </tbody>
+  </table>
+  <div class="chart" id="chart-idx"></div>
+  <p class="chart-note">11-02 涨跌幅，东财已完成日线<sup>[1]</sup>。</p>
+  <h3>为什么涨跌：传导链逐环取证</h3>
+  <ol class="chain">
+    <li>沪市成交 8474.59 亿、深市 9362.31 亿，两市 1.78 万亿、放量 1092 亿——反弹有成交背书。<span class="ev you">有数据</span><sup>[1]</sup><sup>[4]</sup></li>
+    <li>政策预期先行：三部门先后召开互换便利与回购增持再贷款座谈会，当日传媒涨 7.77%、计算机涨 4.96%。<span class="ev you">会议有数据</span>／因果属<span class="ev tui">推定</span><sup>[5]</sup><sup>[6]</sup><sup>[16]</sup></li>
+    <li>超跌反抽：10-30 跌 5.48% 的科创50 反弹 3.11%；涨停自 47 家升至 125 家，跌停自 82 家降至 8 家。<span class="ev you">有数据</span><sup>[1]</sup><sup>[8]</sup></li>
+    <li>资金分档确认：人工智能主力净流入 72.16 亿、半导体 52.81 亿、存储 42.25 亿，10-30 的流出全部转正。<span class="ev you">有数据</span><sup>[2]</sup></li>
+    <li>红利线回吐：中证红利主力流出 31.93 亿、银行 19.49 亿；未见新政策。<span class="ev you">有数据</span>／高低切换<span class="ev tui">推定</span><sup>[2]</sup><sup>[7]</sup></li>
+    <li>债市配合而非跷跷板：10Y 国债降至 1.6421%、DR007 降至 1.3567%，资金宽松与反弹同向。<span class="ev you">有数据</span><sup>[10]</sup><sup>[11]</sup></li>
+    <li>承接主体无法证实：中证A500 超大单流入 72.29 亿，510300 却流出 12.61 亿，两口径相反。<span class="ev wei">未取证</span><sup>[2]</sup></li>
+  </ol>
+</section>
+
+<section id="s2">
+  <h2><span class="no">02</span>资金与筹码</h2>
+  <div class="grid g4">
+    <div class="card"><div class="label">两市成交额</div><div class="metric">1.78万亿</div><div class="sub">放量约 1092 亿<sup>[4]</sup></div></div>
+    <div class="card"><div class="label">上涨 / 下跌</div><div class="metric up">4681 / 818</div><div class="sub">涨停 125 · 跌停 8<sup>[7]</sup><sup>[8]</sup></div></div>
+    <div class="card"><div class="label">两融 11-02</div><div class="metric down">23308亿</div><div class="sub">单日减约 123 亿<sup>[9]</sup></div></div>
+    <div class="card"><div class="label">DR007</div><div class="metric">1.3567%</div><div class="sub">OMO 净回笼 5150 亿<sup>[10]</sup></div></div>
+  </div>
+  <div class="chart" id="chart-turnover"></div>
+  <p class="chart-note">近 8 个交易日两市成交额（万亿元），末点 11-02<sup>[1]</sup><sup>[7]</sup>。</p>
+  <h3>宽基 ETF 探针（是探针，不是产品评价）</h3>
+  <table>
+    <thead><tr><th>代码</th><th>主力净额</th><th>超大单</th><th>涨跌</th></tr></thead>
+    <tbody>
+      <tr><td>510300</td><td class="num down">-6.99 亿</td><td class="num down">-12.61 亿</td><td class="num up">+0.49%</td></tr>
+      <tr><td>510050</td><td class="num up">+0.20 亿</td><td class="num down">-6.14 亿</td><td class="num up">+0.31%</td></tr>
+      <tr><td>510500</td><td class="num down">-1.52 亿</td><td class="num down">-2.04 亿</td><td class="num up">+2.39%</td></tr>
+      <tr><td>159338</td><td class="num down">-0.17 亿</td><td class="num down">-1.11 亿</td><td class="num up">+0.97%</td></tr>
+    </tbody>
+  </table>
+  <p>探针在上涨日超大单全部净流出，反弹靠板块内交易型资金、不靠宽基申购承接；两融同日减 123 亿，杠杆资金没回来<sup>[2]</sup><sup>[9]</sup>。10 月股票型ETF 净流入逾 3900 亿是唯一增量证据<sup>[5]</sup>。</p>
+  <div class="card accent">
+    <h4>口径红线</h4>
+    <ul class="tight">
+      <li>北向每日与盘中净买入自 2024-08-19 起官方停止披露，不出现是设计而非遗漏。</li>
+      <li>主力／超大单／大单是按单笔成交金额阈值推算的分档，不等于机构身份。</li>
+      <li>社保、汇金、诚通与国新只能靠季报十大股东，属滞后快照；不断言"国家队在买"，深度复核见最近一期周报。</li>
+    </ul>
+  </div>
+</section>
+
+<section id="s3">
+  <h2><span class="no">03</span>板块速写</h2>
+  <div class="chart" id="chart-flow"></div>
+  <p class="chart-note">11-02 板块主力净额（亿元），白酒为对照：涨 4.00% 却净流出<sup>[2]</sup>。</p>
+  <div class="grid g3">
+    <div class="card risk">
+      <h4>科技：CPO／半导体／存储／算力</h4>
+      <ul class="tight">
+        <li>四线主力全部转正、涨 1.50%—4.06%，人工智能 72.16 亿居首<sup>[2]</sup>。</li>
+        <li>资金流不等于景气：DDR5 现货 11-02 报 61.50 美元、环比持平<sup>[20]</sup>。</li>
+        <li>CPO 无公开周频景气数据；Marvell 拟以约 1150 亿美元全股票收购 Lumentum<span class="tag-verify" title="待核">⚠️</span>待公告<sup>[13]</sup>。</li>
+      </ul>
+    </div>
+    <div class="card base">
+      <h4>银行与红利</h4>
+      <ul class="tight">
+        <li>银行 -0.90%、主力流出 19.49 亿；红利低波 -0.61%，持仓线中唯一收跌<sup>[1]</sup><sup>[2]</sup>。</li>
+        <li>10 月银行、煤炭、石油领涨，昨日属涨多了的回吐，非新增利空<sup>[5]</sup>。</li>
+        <li>11-02 布伦特原油跌 2% 报 111.14 美元，今日能源煤炭链承压<sup>[21]</sup>。</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>创新药</h4>
+      <ul class="tight">
+        <li>全指医药涨 0.71%，主力却流出 8.17 亿——指数红、分档绿<sup>[2]</sup>。</li>
+        <li>未查到可具名政策或对外授权，驱动按未取证处理<span class="tag-verify" title="待核">⚠️</span>。</li>
+        <li>口径：创新药无单一板块码，用全指医药指数加媒体交叉<sup>[1]</sup>。</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="s4">
+  <h2><span class="no">04</span>隔夜海外（2026-11-02 美东收盘）</h2>
+  <table>
+    <thead><tr><th>标的</th><th>收盘</th><th>涨跌</th></tr></thead>
+    <tbody>
+      <tr><td>纳斯达克100</td><td class="num">27989.82</td><td class="num down">-1.39%</td></tr>
+      <tr><td>纳斯达克综合</td><td class="num">25164.36</td><td class="num down">-1.07%</td></tr>
+      <tr><td>标普500</td><td class="num">7541.40</td><td class="num down">-0.51%</td></tr>
+      <tr><td>道琼斯</td><td class="num">51983.98</td><td class="num up">+0.41%</td></tr>
+      <tr><td>美债10Y</td><td class="num">4.9187%</td><td class="num">约 -1.2BP</td></tr>
+      <tr><td>美元指数</td><td class="num">101.79</td><td class="num down">-0.18%</td></tr>
+      <tr><td>离岸人民币</td><td class="num">6.6473</td><td class="num up">升 0.09%</td></tr>
+    </tbody>
+  </table>
+  <ul class="tight">
+    <li>腾讯四项报价与同花顺逐项吻合：道指涨而纳指跌，杀的是成长端；美债 10Y 反降 1.2BP<sup>[3]</sup><sup>[14]</sup>。</li>
+    <li>跌在 AI 硬件：费城半导体跌逾 3%，光模块与存储链普跌<sup>[15]</sup>。</li>
+    <li>苹果第四财季营收 1144.8 亿美元、增 12%，iPhone 增 17%、大中华区 175.4 亿美元增 21%，下季指引 7%—10%，盘后跌逾 3%<sup>[18]</sup>。</li>
+    <li>美国 10 月标普全球制造业 PMI 终值 54.9、低于预期 56；ISM 头条值未取证<span class="tag-verify" title="待核">⚠️</span>。中期选举 11-03 投票，两院易手被当作美股逆风<sup>[12]</sup><sup>[13]</sup><sup>[19]</sup>。</li>
+  </ul>
+</section>
+
+<section id="s5">
+  <h2><span class="no">05</span>政策与信息面</h2>
+  <p class="lead">一句话总结：座谈会真开了、利率换锚也真落地，但再贷款只有媒体转述、没有通知全文；今日的变量在盘外。</p>
+  <ul class="tight">
+    <li><b>回购增持再贷款（已公布→已解读，细则待落地）</b>：11-02 央行会同金融监管总局、证监会召开互换便利与再贷款两场座谈会<sup>[16]</sup>；据参会人士，工具将转为长期制度性安排、利率由 1.25% 降至 1.00%<span class="tag-verify" title="待核">⚠️</span><sup>[17]</sup>。</li>
+    <li><b>流动性（已公布）</b>：11-02 开展 5410 亿元隔夜逆回购 @1.25%，对冲 1 万亿隔夜与 560 亿元 7 天到期，净回笼 5150 亿元；DR001 1.2884%<sup>[10]</sup>。</li>
+    <li><b>利率换锚（已生效）</b>：隔夜逆回购为每日主工具，本期是换锚后第二个操作日<sup>[10]</sup>。</li>
+    <li><b>财政与交易所（无新增）</b>：未查到财政部增量政策或沪深交易所新制度；上期提到的港股价格门槛生效一事未复核到原文，不再断言。</li>
+    <li><b>公开纠错</b>：上期两条待核已核到：座谈会确已召开（仍无通知全文）、苹果电话会确在 11-03 早 6 时<sup>[19]</sup>。</li>
+  </ul>
+</section>
+
+<section id="s6">
+  <h2><span class="no">06</span>今日走势推演</h2>
+  <div class="grid g3">
+    <div class="card risk">
+      <h4><span class="pill bull">乐观</span>细则落地</h4>
+      <p><b>触发</b>：回购增持再贷款出官方通知或试点扩容，果链与 AI 应用不破 11-02 收盘。</p>
+      <p><b>方向</b>：上证 3640—3690，科创50 与创业板弹性最大。</p>
+      <p><b>验证</b>：涨停家数维持三位数、半导体主力续正流入、成交守住 1.7 万亿上方。</p>
+    </div>
+    <div class="card base">
+      <h4><span class="pill">基准</span>缩量轮动</h4>
+      <p><b>触发</b>：座谈会表态无细则，海外 AI 链弱但苹果营收超预期托住果链。</p>
+      <p><b>方向</b>：上证 3600—3660 窄幅震荡，主题内部轮动、红利止跌。</p>
+      <p><b>验证</b>：成交缩至 1.6 万亿下方且上证不破 3600；DR007 稳在 1.36% 附近。</p>
+    </div>
+    <div class="card">
+      <h4><span class="pill bear">悲观</span>外部压制</h4>
+      <p><b>触发</b>：开票推高美债 10Y 重回 4.95% 上方、纳指100 期货再跌逾 1%，或苹果指引下修传导到果链。</p>
+      <p><b>方向</b>：上证回踩 3560—3580，科创50 领跌、红利补跌。</p>
+      <p><b>验证</b>：跌停家数回到两位数、科技板块主力转负、宽基 ETF 超大单持续流出。</p>
+    </div>
+  </div>
+  <p>这是概率排序，不是预测承诺。</p>
+  <h4>今日看点</h4>
+  <ul class="tight">
+    <li>09:15 央行公开市场公告；美国中期选举今日投票，结果自今夜至明晨分批出炉<sup>[19]</sup>。</li>
+    <li>本周无新股申购；11 月 131 家公司解禁约 1115.66 亿元，环比降 51.65%<sup>[23]</sup><sup>[24]</sup>。</li>
+    <li>上期把 GPU 龙头财报排在 11-03，经核为错：英伟达下一份财报是 11-17，本期更正<sup>[22]</sup>。</li>
+  </ul>
+</section>
+
+<section id="s7">
+  <h2><span class="no">07</span>持仓关联提示</h2>
+  <p><b>中证A500（000510）</b>：涨 1.07%、主力净流入 45.88 亿，但探针 159338 同期流出 0.17 亿，申赎口径没有承接证据<sup>[1]</sup><sup>[2]</sup>。</p>
+  <p><b>中证红利低波（H30269）</b>：跌 0.61%，持仓中唯一收跌的 A 股线；拥挤度是主矛盾，隔夜油价下跌再添一层压力<sup>[1]</sup><sup>[21]</sup>。</p>
+  <p><b>科创50（000688）</b>：涨 3.11%，只收复 10-30 跌幅 5.48% 的一半；直接暴露于隔夜费城半导体的弱势<sup>[1]</sup><sup>[15]</sup>。</p>
+  <p><b>纳斯达克100（NDX）</b>：跌 1.39%，连续第二日走弱；苹果盘后跌逾 3%，今夜权重股方向未定<sup>[3]</sup><sup>[18]</sup>。</p>
+  <p><b>539002 建信新兴市场混合(QDII)A</b>：主动型新兴市场 QDII，不跟踪纳指，前十集中在台韩存储与代工、美股光模块与存储链。净值停在 10-30 的 2.0900（跌 6.36%），上期预估的下行已兑现；QDII 净值滞后，11-02 海外同类仍跌，下一份承压属口径推断<sup>[3]</sup><sup>[25]</sup>。现货可核值停在 11-02<sup>[20]</sup>。</p>
+  <p><b>019018 易方达信息产业混合C</b>：主动偏股 TMT，前十约 44% 集中在 CPO 与算力链；净值 5.5650（涨 0.82%），自 10-15 的 6.4560 仍回撤 13.80%<sup>[25]</sup>。价格已反弹而可核景气未上修，Marvell 收购 Lumentum 若坐实是本链条的整合变量，先看公告再看估值<sup>[13]</sup>。</p>
+</section>
+
+<section id="src">
+  <h2><span class="no">08</span>数据来源、待核清单与免责</h2>
+  <div class="src">
+    <ol>
+      <li>东方财富 日线接口 · 2026-11-03 https://push2his.eastmoney.com/api/qt/stock/kline/get?secid=1.000001&amp;klt=101 </li>
+      <li>东方财富 资金流 daykline · 2026-11-03 https://push2his.eastmoney.com/api/qt/stock/fflow/daykline/get?secid=90.BK0800 </li>
+      <li>腾讯证券 隔夜行情 · 2026-11-03 https://qt.gtimg.cn/q=usNDX,usIXIC,usINX,usDJI,hkHSI </li>
+      <li>央广网 收评 · 2026-11-02 https://www.cnr.cn/jingji/gundong/20261102/t20261102_527860124.shtml </li>
+      <li>21世纪经济报道 股票ETF与行情 · 2026-11-02 https://www.21jingji.com/article/20261102/herald/75ed67f9c8479a57ff426b273c65e54b.html </li>
+      <li>21世纪经济报道 AI短剧与券商走强 · 2026-11-02 https://www.21jingji.com/article/20261102/herald/9dbb9968f9ffe7dd9a94327675dbc73d.html </li>
+      <li>东方财富 财富号 板块与家数 · 2026-11-03 https://caifuhao.eastmoney.com/news/20261103060318941746920 </li>
+      <li>东方财富 涨跌停池 · 2026-11-03 https://push2ex.eastmoney.com/getTopicZTPool?date=20261102 ；跌停池同接口 </li>
+      <li>东方财富 数据中心 融资融券 · 2026-11-03 https://data.eastmoney.com/rzrq/ </li>
+      <li>新华财经 货币市场日报 · 2026-11-02 https://www.cnfin.com/hg-lb/detail/20261102/4489919_1.html </li>
+      <li>东方财富 收益率与汇率日线 · 2026-11-03 https://push2his.eastmoney.com/api/qt/stock/kline/get?secid=171.CN10Y&amp;klt=101 ；171.US10Y、100.UDI、133.USDCNH 同接口 </li>
+      <li>财联社 美国10月标普制造业PMI终值 · 2026-11-02 https://m.cls.cn/detail/2523056 ；每经 · 2026-11-02 https://www.mrjjxw.com/articles/2026-11-02/4635044.html </li>
+      <li>华尔街见闻 早餐FM-Radio · 2026-11-03 https://wallstreetcn.com/articles/3785026 </li>
+      <li>同花顺 隔夜欧美 · 2026-11-03 http://stock.10jqka.com.cn/usstock/mgscfx_list/ </li>
+      <li>东方财富 隔夜外盘 · 2026-11-03 https://stock.eastmoney.com/a/cgywp.html </li>
+      <li>新浪财经 三部门座谈会 · 2026-11-02 https://finance.sina.com.cn/wm/2026-11-02/doc-inixkmaq7055760.shtml  </li>
+      <li>财联社 回购增持再贷款优化 · 2026-11-02 https://www.cls.cn/detail/2522955 </li>
+      <li>苹果第四财季财报报道 · 2026-11-03 https://www.163.com/dy/article/LAPTNOS205199NPP.html ；前瞻 https://finance.sina.com.cn/roll/2026-10-07/doc-iniuknsp4816803.shtml </li>
+      <li>21世纪经济报道 本周日历 · 2026-11-01 https://www.21jingji.com/article/20261101/herald/24ccc63aedb376206d296e697a0a5af3.html ；新华社 中期选举 · 2026-10-26 https://www.news.cn/world/20261026/6fda0e8c9eea4452ac909bf3b689d6e0/c.html </li>
+      <li>TrendForce DRAM 现货价 · 2026-11-02 https://www.trendforce.cn/price/dram/dram_spot </li>
+      <li>每日经济新闻 布伦特原油 · 2026-11-02 https://www.mrjjxw.com/articles/2026-11-02/4633821.html ；财联社 油价与选举定价 · 2026-11-02 https://www.cls.cn/detail/2521930 </li>
+      <li>富途 英伟达财报日历 · 2026-11-03 https://www.futunn.com/stock/NVDA-US/earnings </li>
+      <li>新华财经 11月解禁规模 · 2026-11-02 https://www.cnfin.com/yw-lb/detail/20261102/4489492_1.html </li>
+      <li>中财网 新股日历 · 2026-11-03 https://newstock.cfi.cn/ </li>
+      <li>东方财富 天天基金 净值序列 · 2026-11-03 https://api.fund.eastmoney.com/f10/lsjz?fundCode=019018 ；539002 同接口 </li>
+    </ol>
+    <h3>待核清单</h3>
+    <ul class="tight">
+      <li>回购增持再贷款转长期、利率降至 1.00% 仅媒体转述，官方通知全文未查到。</li>
+      <li>美国 10 月 ISM 制造业 PMI 头条值未取证，仅有分项。</li>
+      <li>Marvell 约 1150 亿美元收购 Lumentum 暂为单源，待双方公告。</li>
+      <li>布伦特原油跌幅口径冲突：早餐记 7.63%、每经记跌 2% 报 111.14 美元，本期取后者。</li>
+      <li>成交额自算 1.7837 万亿与财富号 1.80 万亿有差。</li>
+      <li>10 月财新制造业 PMI 无可引用原文；创新药无可具名催化。</li>
+      <li>国家队主体身份待季报十大股东复核；北向每日净买入自 2024-08-19 停披，不出现为设计。</li>
+            <li>MCP 行情连接器停用、会话内不可调用，已降级为公开接口加媒体交叉并重新启用。</li>
+    </ul>
+    <p>本页由自动化任务生成，仅作信息整理与研究记录，不构成投资建议。数据可能存在延迟或错漏，请以官方披露为准。</p>
+  </div>
+</section>
+
+<div class="disclaimer">
+  本页由定时任务自动生成，含个人持仓信息，不被搜索引擎收录。逐行业深度展开见同作者的<b>财经周报</b>：<a href="https://wmr-ram.github.io/financial-weekly/">financial-weekly</a>。
+</div>
+
+<footer class="pager">
+  <a href="index.html">← 返回归档</a>
+  <a href="2026-11-02.html">上一期 →</a>
+</footer>
+
+</div>
+
+<script src="../assets/js/chart.js?v=2026-11-02b"></script>
+<script src="../assets/js/ticker.js?v=2026-11-02b"></script>
+<script>
+/* 快照为 2026-11-02（上一交易日）收盘值；行情条轮询覆盖 11-03 实时值 */
+window.FW_TICK = [
+  {name:"上证",     em:"1.000001", tc:"sh000001", dec:2, snapshot:{price:3638.03, pct:1.08}},
+  {name:"深成",     em:"0.399001", tc:"sz399001", dec:2, snapshot:{price:11010.68, pct:1.63}},
+  {name:"沪深300",  em:"1.000300", tc:"sh000300", dec:2, snapshot:{price:4016.92, pct:0.79}},
+  {name:"中证A500", em:"1.000510", tc:"sh000510", dec:2, snapshot:{price:4844.36, pct:1.07}},
+  {name:"科创50",   em:"1.000688", tc:"sh000688", dec:2, snapshot:{price:1196.94, pct:3.11}},
+  {name:"中证500",  em:"1.000905", tc:"sh000905", dec:2, snapshot:{price:6420.23, pct:2.46}},
+  {name:"创业板",   em:"0.399006", tc:"sz399006", dec:2, snapshot:{price:2458.70, pct:1.87}},
+  {name:"中证红利", em:"1.000922", tc:"sh000922", dec:2, snapshot:{price:5587.66, pct:-0.09}},
+  {name:"红利低波", em:"2.H30269",               dec:2, snapshot:{price:11310.84, pct:-0.61}},
+  {name:"恒生",     em:"124.HSI",  tc:"hkHSI",   dec:2, snapshot:{price:23393.32, pct:0.42}},
+  {name:"纳指100",  tc:"usNDX",                  dec:2, snapshot:{price:27989.82, pct:-1.39}},
+  {name:"纳指综合", tc:"usIXIC",                 dec:2, snapshot:{price:25164.36, pct:-1.07}},
+  {name:"标普500",  em:"100.SPX",  tc:"usINX",   dec:2, snapshot:{price:7541.40, pct:-0.51}},
+  {name:"道指",     tc:"usDJI",                  dec:2, snapshot:{price:51983.98, pct:0.41}}
+];
+</script>
+<script>
+fwBar(document.getElementById("chart-idx"), {
+  height: 280, digits: 2, suffix: "%", axisDigits: 1, minPer: 42,
+  labels: ["上证","深成","沪深300","A500","科创50","创业板","中证红利","红利低波","银行","恒生"],
+  values: [1.08,1.63,0.79,1.07,3.11,1.87,-0.09,-0.61,-0.90,0.42]
+});
+fwLine(document.getElementById("chart-turnover"), {
+  height: 250, digits: 2,
+  xLabels: ["10-22","10-23","10-26","10-27","10-28","10-29","10-30","11-02"],
+  series: [{name:"两市成交额", color:"#f5a623", values:[1.529,1.956,1.609,1.461,1.628,1.557,1.674,1.784]}]
+});
+fwBar(document.getElementById("chart-flow"), {
+  height: 280, digits: 2, suffix: "亿", axisDigits: 0, minPer: 46,
+  labels: ["人工智能","半导体","存储","光模块","国产芯片","CPO","算力","白酒"],
+  values: [72.16,52.81,42.25,34.89,32.45,15.93,7.90,-3.19]
+});
+</script>
+</body>
+</html>
