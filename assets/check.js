@@ -88,6 +88,16 @@ for (const h of htmls) {
   }
   if (!assets.length && h !== "index.html") bad(h + " 没有引用任何 assets 资源");
 
+  /* 页内相对链接必须指向真实文件（daily/ 在子目录，写 href="index.html" 会 404，必须 ../index.html） */
+  const links = [...src.matchAll(/(?:href|src)="([^"]+)"/g)].map(m => m[1])
+    .filter(u => !/^(https?:|#|mailto:|data:|\/\/)/i.test(u));
+  for (const u of links) {
+    const clean = u.split("?")[0].split("#")[0];
+    if (!clean) continue;
+    const target = path.resolve(path.join(root, path.dirname(h)), clean);
+    if (!fs.existsSync(target)) bad(`${h} 链接指向不存在的文件：href="${u}"（相对 ${path.dirname(h)}/ 解析不到；子目录页面回根目录要写 ../）`);
+  }
+
   /* 正文里不许出现括号式来源；引用只能是文末编号 */
   const srcIdx = src.indexOf('<section id="src"');
   const body = src.slice(0, srcIdx < 0 ? src.length : srcIdx);
