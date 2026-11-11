@@ -1,1 +1,102 @@
-IyDotKLnu4/ml6nmiqXvvIhmaW5hbmNpYWwtbW9ybmluZy1wb3N077yJCgrmr4/kuKogQSDogqHkuqTmmJPml6Xoh6rliqjnlJ/miJDkuKTmnJ/nmoTkuK3mlofotKLnu4/ml6nmiqXvvIzpnZnmgIHpobXpnaLpg6jnvbLlnKggR2l0SHViIFBhZ2Vz44CCCuebmOWJjeeJiOWkjeebmOS4iuS4gOS6pOaYk+aXpeW5tue7meW9k+aXpeaDheaZr+aOqOa8lO+8jOaUtuebmOeJiOWcqOWQjOS4gOmhtei/veWKoOmqjOivgeWMuuKAlOKAlOebmOWJjeWGmeS4i+eahOWIpOaWreWPr+S7peiiq+mAkOadoeWvuei0puOAggoKLSDnur/kuIrlnLDlnYDvvJo8aHR0cHM6Ly93bXItcmFtLmdpdGh1Yi5pby9maW5hbmNpYWwtbW9ybmluZy1wb3N0Lz4KLSDnlJ/miJDmlrnlvI/vvJpRb2RlciDlrprml7bku7vliqHvvIzml6Dkurrlt6XlubLpooTvvJvkvZzogIXnu7TmiqTnmoTmmK9b6KeE6IyD5paH5Lu2XSguL01PUk5JTkdfU1BFQy5tZCnvvIzpobXpnaLnlLHku7vliqHmjInop4TojIPkuqflh7oKLSDlhoXlrrnlkKvkuI7kuKrkurrmjIHku5Pnm7jlhbPmjIfmlbDnmoTmj5DnpLrvvIzku4XkvZzkuKrkurrnoJTnqbborrDlvZXvvIwqKuS4jeaehOaIkOaKlei1hOW7uuiurioqCgojIyDmm7TmlrDml7bpl7QKCnwg5pyf5qyhIHwgY3Jvbu+8iEFzaWEvU2hhbmdoYWnvvIkgfCDlgZrku4DkuYggfAp8LS0tfC0tLXwtLS18Cnwg55uY5YmN54mIIHwgYDIwIDkgKiAqIDEtNWAgfCDmlbTpobXnlJ/miJAgYGRhaWx5LzzlvZPml6U+Lmh0bWxgIOW5tumHjeW7uuW9kuaho+mmlumhtSB8Cnwg5pS255uY6aqM6K+B54mIIHwgYDMwIDE1ICogKiAxLTVgIHwg5Y+q5Zyo5b2T5pel6aG15bC+6YOo5o+S5YWlIGA8c2VjdGlvbiBpZD0icy1jbG9zZSI+YO+8jOaKiuW9kuaho+eKtuaAgeaUueaIkCLlt7LmlLbnm5jpqozor4EiIHwKCuebmOWJjeWumuWcqCAwOToyMCDogIzkuI3mmK8gMDk6MDDvvIzmmK/kuLrkuobmi7/liLDlpK7ooYzlvZPml6XlhazlvIDluILlnLrmk43kvZzlhazlkYrvvIjpgJrluLggMDk6MTUg5LmL5ZCO5Y+R5biD77yJ44CCCuaUtuebmOeJiCoq5LiN5YWB6K645pS55YaZ55uY5YmN5q2j5paHKirigJTigJTov5nmmK/kuLrkuoborqnmjqjmvJTlj6/or4HkvKrvvIzlh7rplJnlsLHlnKjpqozor4HljLrlhazlvIDmm7TmraPjgIIK5ZGo5pyr44CB5rOV5a6a6IqC5YGH5pel77yI5oyJ5LiK5Lqk5omA5LyR5biC6KGo77yJ5LiN55Sf5oiQ44CB5LiN5o+Q5Lqk44CCCgojIyDpobXpnaLnu5PmnoQKCuWbuuWumiAxMSDoioLvvIzpobrluo/kuI3pmo/ooYzmg4Xlj5jljJbvvJoKCmBgYAowMCDku4rml6XkuInmnaEgICAgICAgICAg4omkMyDmnaHliKTmlq3vvIzmr4/mnaHmjIflkJHkuIvmloflr7nlupTlsI/oioIKMDEg5LiK5LiA5Lqk5piT5pel5aSN55uYICAgIOaUtuebmOihqCArIOW9kuWboOmTvu+8iOmAkOeOr+agh+azqCLmnInmlbDmja4v5o6o5a6aL+acquWPluivgSLvvIkKMDIg6LWE6YeR5LiO562556CBICAgICAgICDmiJDkuqTpop3jgIHkuKTono3jgIHlrr3ln7ogRVRGIOi1hOmHkeaOoumSiOOAgea2qOi3jOWIhuW4gwowMyDkuLvnur/mnb/lnZfkuI7mnb/lnZfpgJ/lhpkg5Li757q/5Zub6K+B5o2u77yI5rao5bmFL+S4u+WKm+WHgOminS/mtqjlgZzooYzkuJrpm4bkuK3luqYv5oiQ5Lqk6aKd5Y2g5q+U77yJKyDnp5HmioDjgIHnuqLliKnjgIHliJvmlrDoja/pgJ/lhpkKMDQg6aKY5p2Q5LiO5oOF57uqICAgICAgICDmtqjlgZzot4zlgZzlrrbmlbDkuI7ov57mnb/pq5jluqbvvIzlj6rliLDpopjmnZDkuI7lrrbmlbAKMDUg6ZqU5aSc5rW35aSW5LiO5aSW6YOo5L+h5Y+3IOe+juiCoeOAgei0ueWfjuWNiuWvvOS9kyBTT1jjgIFLT1NQSS/ml6Xnu4/jgIFBNTAg5aSc55uY44CB576O5YC6CjA2IOaUv+etluS4juS/oeaBr+mdoiAgICAgIOmalOWknOiHs+ebmOWJjeaWsOWinuaUv+etluS4juW3suWFrOW4g+aVsOaNrgowNyDku4rml6XotbDlir/mjqjmvJQgICAgICDkuZDop4Iv5Z+65YeGL+aCsuinguS4ieaDheaZryArIOinpuWPkeadoeS7tuS4juivgeS8quS/oeWPtyArIOeCueS9jeWMuumXtOihqAowOCDmjIHku5PlhbPogZTmj5DnpLogICAgICDmr4/kuKrmoIfnmoQgMeKAlDMg5Y+l77yM5LiN57uZ5pON5L2c5oyH5LukCjA5IOacuuaehOingueCueS4gOWPpeivnQrmlbDmja7mnaXmupDkuI7lhY3otKMgICAgICAg57yW5Y+35p2l5rqQICsg5b6F5qC45riF5Y2VCisg5pS255uY6aqM6K+B5Yy6ICAgICAgICAgIO+8iOS7hSAxNTozMCDkuYvlkI7lrZjlnKjvvIkKYGBgCgrmraPmlofkuK3mloflrZfmlbAgMTgwMOKAlDM0MDDvvIzlkKvpqozor4HljLrml7bkuIrpmZAgMzkwMO+8m+WbvuihqCDiiaQzIOW8oOOAgui2heS6huWwseWIoOWGheWuue+8jOS4jee8qeWtl+WPt+OAggoKIyMg55uu5b2VCgpgYGAKaW5kZXguaHRtbCAgICAgICAgICAgICAgICAg5b2S5qGj6aaW6aG177yM5q+P5qyh6L+Q6KGM5omr5o+PIGRhaWx5LyDmlbTkvZPph43lu7oKZGFpbHkvPFlZWVktTU0tREQ+Lmh0bWwgICAg5b2T5pel6aG177yI5paH5Lu25ZCN55So5Y+R5biD5pel77yJCmRhdGEvPFlZWVktTU0tREQ+Lmpzb24gICAgIOW9k+aXpee7k+aehOWMluW/q+eFpwpNT1JOSU5HX1NQRUMubWQgICAgICAgICAgICDllK/kuIDmnYPlqIHop4TojIPvvJrlj6PlvoTjgIHmnb/lnZfjgIHmlbDmja7mupDjgIHnoaznuqbmnZ/pg73mlLnov5nph4wKYXNzZXRzL2Nzcy90aGVtZS5jc3MgICAgICAg5rex6Imy6YeR6J6N57uI56uv6aOO77yI5rao57qi6LeM57u/77yJCmFzc2V0cy9qcy90aWNrZXIuanMgICAgICAgIOmhtumDqOihjOaDheadoe+8jOiHqumAguW6lOi9ruivogphc3NldHMvanMvY2hhcnQuanMgICAgICAgICDpm7bkvp3otZblhoXogZQgU1ZHIOWbvuihqO+8jOeqhOWxj+iHquWKqOaUueaoquWQkeadoeW9ogphc3NldHMvZmV0Y2hfZmxvdy5qcyAgICAgICDmnb/lnZcv5oyH5pWw6YCQ5pel6LWE6YeR5rWB5Y+W5pWwCmFzc2V0cy9mZXRjaF9ldGZfYW5jaG9yLmpzIOWQhOWuveWfuuaMh+aVsOmUmiBFVEYg55qE6KeE5qih5LiO6Lef6Liq5oyH5pWwCmFzc2V0cy9jaGVjay5qcyAgICAgICAgICAgIOWPkeW4g+WJjeiHquajgO+8jOS4jemAmui/h+S4jeWPkeW4gwpgYGAKCmBNT1JOSU5HX1NQRUMubWRgIOS4juWumuaXtuS7u+WKoeaPkOekuuivjeeahOWFs+ezu+aYr++8muaPkOekuuivjeWPquaKiui/kOihjOaMh+WbnuinhOiMg++8jOinhOiMg+aUueS6huWwseeUn+aViO+8m+iwg+WPo+W+hOOAgeaNouaVsOaNrua6kOOAgeaUueevh+W5hemDveaUueinhOiMg+aWh+S7tuOAggoKIyMg5pWw5o2u5rqQCgpgdG9kYXlfaW52ZXN0bWVudF9maW5hbmNpYWxfZGF0YWAgTUNQIOS6jiAyMDI2LTExLTAyIOi1t+i1hOa6kOWMheWkseaViO+8iOi/nuaOpeWcqO+8jOi/lOWbniBgNDAwMDEg5oKo5peg5Y+v55So55qE6LWE5rqQ5YyFYO+8ie+8jArnjrDlnKjlhajpg6jotbDlhazlvIDmjqXlj6PvvIzmr4/kuKrmjqXlj6PnmoTlrZfmrrXlj6PlvoTkuI7lt7Lnn6XpmbfpmLHpg73lhpnlnKggYE1PUk5JTkdfU1BFQy5tZGAgwqcyIOeahOihqOmHjO+8mgoKLSDmjIfmlbDkuI7mnb/lnZfml6Xnur/jgIHpgJDml6XotYTph5HmtYHvvJpgcHVzaDJoaXMuZWFzdG1vbmV5LmNvbWAKLSDmtqjlgZwv6LeM5YGc5rGg77yaYHB1c2gyZXguZWFzdG1vbmV5LmNvbWDvvIhgZGF0ZWAg5Y+C5pWw6KKr5b+955Wl77yM5Y+q6L+U5Zue5pyA6L+R5LiA5Liq5Lqk5piT5pel77yJCi0g5Lik6J6N77yaYGRhdGFjZW50ZXItd2ViLmVhc3Rtb25leS5jb21g77yIYFJQVEFfUlpSUV9MU0hKYO+8jOaKq+mcsua7nuWQjiAx4oCUMiDkuKrkuqTmmJPml6XvvIkKLSBTSElCT1LvvJrkuK3lm73otKfluIHnvZHvvJvnvo7lgLrmlLbnm4rnjofvvJrnvo7lm73otKLmlL/pg6ggQ1NWCi0g5Z+66YeR5YeA5YC85LiO5oyB5LuT77yaYGZ1bmQuZWFzdG1vbmV5LmNvbS9waW5nemhvbmdkYXRhYAotIEVURiDop4TmqKHkuI7ot5/ouKrmjIfmlbDvvJpgZnVuZG1vYmFwaS5lYXN0bW9uZXkuY29tYO+8iOacn+acq+WHgOi1hOS6p+WPo+W+hO+8jOmdnuWunuaXtu+8iQotIOaMh+aVsOS8sOWAvOWIhuS9je+8muibi+WNtyBgZGphcGlg77yI5YiG5L2N56qX5Y+j5LiN562J5LqO5Lit6K+B5LqU5bm05YiG5L2N77yM5byV55So5b+F6aG75YaZ5Y+j5b6E77yJCi0g5aKD5aSW5oyH5pWw77ya6IW+6K6vIGBxdC5ndGltZy5jbmDvvIjms6jmhI/kuJzotKIgYDEwMC5ORFhgIOaYr+e6s+aMh+e7vOWQiO+8jOS4jeaYr+e6s+aMhyAxMDDvvIkKLSDlr4zml7bkuK3lm70gQTUwIOacn+aMh++8muaWsOa1qiBgaHEuc2luYWpzLmNuYO+8iOaXoCBDT1JT77yM5Y+q6IO955Sf5oiQ5pe25oqT5Y+W77yJCi0g5pS/562W44CB5paw6Ze744CB5py65p6E6KeC54K577yaV2ViU2VhcmNoIC8gV2ViRmV0Y2jvvIzoh7PlsJEgMyDnu4TlhbPplK7or43kuqTlj4kKCuWPluS4jeWIsOeahOaVsOaghyDimqDvuI8g5bm26L+b5b6F5qC45riF5Y2V77yM5LiN55So5qih5Z6L6K6w5b+G6KGl77yM5Lmf5LiN57yW6YCgIFVSTOOAggoKIyMg5pys5Zyw6LeR5LiA6YGNCgpgYGBiYXNoCmNkIEU6L2ZpbmFuY2lhbC1tb3JuaW5nLXBvc3QKbm9kZSBhc3NldHMvZmV0Y2hfZmxvdy5qcyAyMDI2LTExLTAxIDIwMjYtMTEtMTEgOTAuQkswOTE3ICAgIyDotYTph5HmtYHlj5bmlbDnpLrkvosKbm9kZSBhc3NldHMvZmV0Y2hfZXRmX2FuY2hvci5qcyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIyDplJogRVRGIOinhOaooQpub2RlIGFzc2V0cy9jaGVjay5qcyBFOi9maW5hbmNpYWwtbW9ybmluZy1wb3N0ICAgICAgICAgICAgICAjIOWFqOermeiHquajgO+8jEZBSUwg5bCx5LiN6K+l5Y+R5biDCmBgYAoKYGNoZWNrLmpzYCDljaHnmoTmmK/nu5PmnoTlhajnq5nvvIjmoIfnrb7pl63lkIjjgIHmr4/ooajmnIkgYDx0aGVhZD5g44CB57yW5Y+35byV55So6IO95a+55LiK5p2l5rqQ6KGo44CB6LWE5rqQIGA/dj1gIOeJiOacrOWPt+S4gOiHtO+8ie+8jArlhoXlrrnop4TliJnvvIjnr4fluYXjgIHlv4XlpIflsI/oioLjgIHplJogRVRGIOS7o+eggeOAgWDkuLvnur9gIOaOqui+nuOAgeebuOWvuemTvuaOpeaWh+S7tuaYr+WQpuecn+eahOWtmOWcqO+8ieWPquWNoeacgOaWsOS4gOacn+OAggoKIyMg5bey55+l6K6+6K6h5Y+W6IiNCgotIOWbvuihqOS4jeWHuua7muWKqOadoe+8mmBjaGFydC5qc2Ag6K6pIFNWRyDlrr3luqbnrYnkuo7lrrnlmajlrr3luqbjgIHpq5jluqbnlLHlm77ooajoh6rnrpfvvIznsbvnm67mjKTkuoblsLHoh6rliqjmjaLmqKrlkJHmnaHlvaLlm77jgIIKICDml6fnmoQgYG92ZXJmbG93LXg6YXV0b2Ag5pa55qGI5Lya6L+e5bim5oqKIGBvdmVyZmxvdy15YCDlj5jmiJAgYXV0b++8jOaJi+acuuS4iuW/hemhu+S4iuS4i+a7keaJjeeci+W+l+WFqOOAggotIGBkYWlseS9gIOmHjOaJgOacieWbnuermeeCueagueeahOmTvuaOpeW/hemhu+WGmSBgLi4vYO+8jOWGmeaIkCBgaW5kZXguaHRtbGAg5Lya6Kej5p6Q5oiQIGBkYWlseS9pbmRleC5odG1sYCDnm7TmjqUgNDA077yIMjAyNi0xMS0wNCDlrp7mtYvouKnov4fvvIznjrDlnKggYGNoZWNrLmpzYCDkvJrmi6bvvInjgIIKLSDmr4/pobXluKYgYDxtZXRhIG5hbWU9InJvYm90cyIgY29udGVudD0ibm9pbmRleCxub2ZvbGxvdyI+YO+8jOWboOS4uumhtemdouWQq+aMgeS7k+S/oeaBr++8m+S7k+W6k+aYr+WFrOW8gOeahO+8jGdpdCDljoblj7LliKDkuI3lubLlh4DvvIzpk77mjqXliKvlpJbkvKDjgIIKLSDmlLnov4cgYGFzc2V0cy9gIOS4i+S7u+S9leaWh+S7tu+8jOWFqOermSBgP3Y9YCDlv4XpobvpgJLlop7kuIDkvY3kuJTlkITpobXkuIDoh7TvvIzlkKbliJnmtY/op4jlmajnvJPlrZjkvJrorqnkv67lpI3nnIvotbfmnaXmsqHnlJ/mlYjjgIIKLSDpg6jnvbLml7YgYGdpdGh1Yi5jb206NDQzYCDlgbblj5Hov57mjqXooqvph43nva7jgILlpLHotKXph43or5UgMyDmrKHlkI7mlLnnlKggR2l0SHViIERhdGEgQVBJIOebtOaOpeaPkOS6pO+8iGBhcGkuZ2l0aHViLmNvbWAg6YCa5bi45Y+v55So77yJ77yM5rWB56iL6K6w5Zyo6KeE6IyDIMKnNOOAgioq5LiN6Z2g5YWz5o6J6K+B5Lmm5qCh6aqM57uV6L+H44CCKioKLSDmnKwgUkVBRE1FIOS4jeWPguS4juermeeCuea4suafk++8jFBhZ2VzIOeUqOeahOaYr+agueebruW9lSBgaW5kZXguaHRtbGDjgIIKCiMjIOWniuWmueermQoKW+i0oue7j+WRqOaKpSDCtyBmaW5hbmNpYWwtd2Vla2x5XShodHRwczovL2dpdGh1Yi5jb20vV01SLVJhbS9maW5hbmNpYWwtd2Vla2x5KSDigJTigJQg5q+P5ZGo5LiAIDA5OjAw77yMCuWBmuWbveWutumYn+i1hOmHkee6v+e0ouWkjeaguOOAgemAkOihjOS4muWxleW8gOOAgeaMh+aVsOS8sOWAvOS6lOW5tOWIhuS9jeetiea3seW6puWGheWuueOAguaXqeaKpeS4jemHjeWkjei/meS6m++8jOS4pOiAheS6kuebuOeLrOeri+OAggo=
+# 财经早报（financial-morning-post）
+
+每个 A 股交易日自动生成两期的中文财经早报，静态页面部署在 GitHub Pages。
+盘前版复盘上一交易日并给当日情景推演，收盘版在同一页追加验证区——盘前写下的判断可以被逐条对账。
+
+- 线上地址：<https://wmr-ram.github.io/financial-morning-post/>
+- 生成方式：Qoder 定时任务，无人工干预；作者维护的是[规范文件](./MORNING_SPEC.md)，页面由任务按规范产出
+- 内容含与个人持仓相关指数的提示，仅作个人研究记录，**不构成投资建议**
+
+## 更新时间
+
+| 期次 | cron（Asia/Shanghai） | 做什么 |
+|---|---|---|
+| 盘前版 | `20 9 * * 1-5` | 整页生成 `daily/<当日>.html` 并重建归档首页 |
+| 收盘验证版 | `30 15 * * 1-5` | 只在当日页尾部插入 `<section id="s-close">`，把归档状态改成"已收盘验证" |
+
+盘前定在 09:20 而不是 09:00，是为了拿到央行当日公开市场操作公告（通常 09:15 之后发布）。
+收盘版**不允许改写盘前正文**——这是为了让推演可证伪，出错就在验证区公开更正。
+周末、法定节假日（按上交所休市表）不生成、不提交。
+
+## 页面结构
+
+固定 11 节，顺序不随行情变化：
+
+```
+00 今日三条          ≤3 条判断，每条指向下文对应小节
+01 上一交易日复盘    收盘表 + 归因链（逐环标注"有数据/推定/未取证"）
+02 资金与筹码        成交额、两融、宽基 ETF 资金探针、涨跌分布
+03 主线板块与板块速写 主线四证据（涨幅/主力净额/涨停行业集中度/成交额占比）+ 科技、红利、创新药速写
+04 题材与情绪        涨停跌停家数与连板高度，只到题材与家数
+05 隔夜海外与外部信号 美股、费城半导体 SOX、KOSPI/日经、A50 夜盘、美债
+06 政策与信息面      隔夜至盘前新增政策与已公布数据
+07 今日走势推演      乐观/基准/悲观三情景 + 触发条件与证伪信号 + 点位区间表
+08 持仓关联提示      每个标的 1—3 句，不给操作指令
+09 机构观点一句话
+数据来源与免责       编号来源 + 待核清单
++ 收盘验证区          （仅 15:30 之后存在）
+```
+
+正文中文字数 1800—3400，含验证区时上限 3900；图表 ≤3 张。超了就删内容，不缩字号。
+
+## 目录
+
+```
+index.html                 归档首页，每次运行扫描 daily/ 整体重建
+daily/<YYYY-MM-DD>.html    当日页（文件名用发布日）
+data/<YYYY-MM-DD>.json     当日结构化快照
+MORNING_SPEC.md            唯一权威规范：口径、板块、数据源、硬约束都改这里
+assets/css/theme.css       深色金融终端风（涨红跌绿）
+assets/js/ticker.js        顶部行情条，自适应轮询
+assets/js/chart.js         零依赖内联 SVG 图表，窄屏自动改横向条形
+assets/fetch_flow.js       板块/指数逐日资金流取数
+assets/fetch_etf_anchor.js 各宽基指数锚 ETF 的规模与跟踪指数
+assets/check.js            发布前自检，不通过不发布
+```
+
+`MORNING_SPEC.md` 与定时任务提示词的关系是：提示词只把运行指回规范，规范改了就生效；调口径、换数据源、改篇幅都改规范文件。
+
+## 数据源
+
+`today_investment_financial_data` MCP 于 2026-11-02 起资源包失效（连接在，返回 `40001 您无可用的资源包`），
+现在全部走公开接口，每个接口的字段口径与已知陷阱都写在 `MORNING_SPEC.md` §2 的表里：
+
+- 指数与板块日线、逐日资金流：`push2his.eastmoney.com`
+- 涨停/跌停池：`push2ex.eastmoney.com`（`date` 参数被忽略，只返回最近一个交易日）
+- 两融：`datacenter-web.eastmoney.com`（`RPTA_RZRQ_LSHJ`，披露滞后 1—2 个交易日）
+- SHIBOR：中国货币网；美债收益率：美国财政部 CSV
+- 基金净值与持仓：`fund.eastmoney.com/pingzhongdata`
+- ETF 规模与跟踪指数：`fundmobapi.eastmoney.com`（期末净资产口径，非实时）
+- 指数估值分位：蛋卷 `djapi`（分位窗口不等于中证五年分位，引用必须写口径）
+- 境外指数：腾讯 `qt.gtimg.cn`（注意东财 `100.NDX` 是纳指综合，不是纳指 100）
+- 富时中国 A50 期指：新浪 `hq.sinajs.cn`（无 CORS，只能生成时抓取）
+- 政策、新闻、机构观点：WebSearch / WebFetch，至少 3 组关键词交叉
+
+取不到的数标 ⚠️ 并进待核清单，不用模型记忆补，也不编造 URL。
+
+## 本地跑一遍
+
+```bash
+cd E:/financial-morning-post
+node assets/fetch_flow.js 2026-11-01 2026-11-11 90.BK0917   # 资金流取数示例
+node assets/fetch_etf_anchor.js                             # 锚 ETF 规模
+node assets/check.js E:/financial-morning-post              # 全站自检，FAIL 就不该发布
+```
+
+`check.js` 卡的是结构全站（标签闭合、每表有 `<thead>`、编号引用能对上来源表、资源 `?v=` 版本号一致），
+内容规则（篇幅、必备小节、锚 ETF 代码、`主线` 措辞、相对链接文件是否真的存在）只卡最新一期。
+
+## 已知设计取舍
+
+- 图表不出滚动条：`chart.js` 让 SVG 宽度等于容器宽度、高度由图表自算，类目挤了就自动换横向条形图。
+  旧的 `overflow-x:auto` 方案会连带把 `overflow-y` 变成 auto，手机上必须上下滑才看得全。
+- `daily/` 里所有回站点根的链接必须写 `../`，写成 `index.html` 会解析成 `daily/index.html` 直接 404（2026-11-04 实测踩过，现在 `check.js` 会拦）。
+- 每页带 `<meta name="robots" content="noindex,nofollow">`，因为页面含持仓信息；仓库是公开的，git 历史删不干净，链接别外传。
+- 改过 `assets/` 下任何文件，全站 `?v=` 必须递增一位且各页一致，否则浏览器缓存会让修复看起来没生效。
+- 部署时 `github.com:443` 偶发连接被重置。失败重试 3 次后改用 GitHub Data API 直接提交（`api.github.com` 通常可用），流程记在规范 §4。**不靠关掉证书校验绕过。**
+- 本 README 不参与站点渲染，Pages 用的是根目录 `index.html`。
+
+## 姊妹站
+
+[财经周报 · financial-weekly](https://github.com/WMR-Ram/financial-weekly) —— 每周一 09:00，
+做国家队资金线索复核、逐行业展开、指数估值五年分位等深度内容。早报不重复这些，两者互相独立。
