@@ -183,7 +183,9 @@ MCP `today_investment_financial_data` 连接虽在但**返回 `40001 您无可�
 7. `node E:/financial-morning-post/assets/check.js E:/financial-morning-post` **不通过不许发布**。
 8. 发布：`git add -A`（先看 `git status`，临时产物别提交）→ commit `morning: <YYYY-MM-DD> <一句话主题>` → `push origin main`；
    github.com:443 常 TLS 超时或连接被重置，失败间隔 5—10 秒重试至多 3 次；仍失败改用 **GitHub Data API**（`gh api` 走 api.github.com，通常可用）：
-   逐文件 `POST /git/blobs`（content 用 base64、先把 CRLF 归一成 LF）→ 以远端 head 的 tree 作 `base_tree` `POST /git/trees` →
+   逐文件 `POST /git/blobs`（content 用 base64、先把 CRLF 归一成 LF、**必须显式带 `"encoding":"base64"`**——
+   2026-11-11 README 首发时漏了这个字段，GitHub 把 base64 串当正文入库，页面上是一串乱码；建 tree 前用返回的 blob sha
+   和本地 `git hash-object` 对一遍）→ 以远端 head 的 tree 作 `base_tree` `POST /git/trees` →
    `POST /git/commits`（parents 填远端当前 sha）→ `PATCH /git/refs/heads/main`（`force` 必须传布尔 `false`，用 `-F` 不是 `-f`）。
    **GitHub MCP 已于 2026-11-06 下线，不要再依赖 `create_or_update_file`**；**禁止用关闭证书校验的方式绕过 TLS 错误**；
    再失败只留本地并在摘要写"本期未发布，原因：网络"。
