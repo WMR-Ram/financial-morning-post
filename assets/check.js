@@ -118,13 +118,14 @@ for (const h of htmls) {
   } else if (anyList && srcIdx >= 0) bad(h + " 有来源表但正文没有任何 [n] 编号引用");
 
   /* 篇幅闸门：早报的立身之本是短。只统计正文（来源节 <section id="src"> 之前）。
-     v3（2026-11-06，加主线板块与今日主线预测）：1800—3400；含收盘验证区上限 3900。 */
+     v3（2026-11-06，加主线板块与今日主线预测）：1800—3400；含收盘验证区上限 3900。
+     v3.1（2026-11-16，§04 加涨跌停板结构）：1800—3600；含收盘验证区上限 4100。 */
   if (h === newest) {
     const bodyOnly = srcIdx >= 0 ? src.slice(0, srcIdx) : src;
     const plain = bodyOnly.replace(/<script[\s\S]*?<\/script>/g, " ").replace(/<style[\s\S]*?<\/style>/g, " ").replace(/<[^>]+>/g, " ");
     const chars = CJK(plain);
     const hasClose = /id="s-close"/.test(src);
-    const cap = hasClose ? 3900 : 3400;
+    const cap = hasClose ? 4100 : 3600;
     if (chars > cap) bad(`${h} 正文 ${chars} 个中文字，超过上限 ${cap}（要删内容，不要缩字号）`);
     else if (chars < 1500) bad(`${h} 正文只有 ${chars} 个中文字，疑似未取到数据就成稿（下限 1500）`);
     else ok(`${h} 正文 ${chars} 字${hasClose ? "（含收盘验证区）" : "（盘前版）"}，符合篇幅 ${cap}`);
@@ -133,6 +134,17 @@ for (const h of htmls) {
     for (const id of ["s1", "s7"]) if (!new RegExp('id="' + id + '"').test(src)) bad(h + ` 缺少必备小节 id="${id}"（01 复盘、07 今日走势推演）`);
     /* 用户 2026-11-06 新增的两块内容，缺了就是漏写 */
     if (!/主线/.test(src)) bad(h + " 正文缺少主线板块（§03 上一交易日主线四证据、§07 今日主线候选与证伪信号）");
+    /* 用户 2026-11-16 新增：§04 涨跌停板结构分析，缺任一块就是漏写。
+       只对 2026-11-17（含）之后的期数生效——今天已发布的盘前版是按旧规范写的，
+       不能让新闸门把当日 15:30 的收盘验证区卡住。 */
+    if (path.basename(h, ".html") >= "2026-11-17") {
+      if (!/跌停/.test(src)) bad(h + " 正文缺少跌停侧（规范 §04③：跌停家数、连续跌停家数、跌停行业分布）");
+      if (!/连板|梯队/.test(src)) bad(h + " 正文缺少连板梯队（规范 §04②：最高连板与首板/2板/3板及以上分布）");
+      if (!/晋级率/.test(src)) bad(h + " 正文缺少晋级率（规范 §04②：当日 2 板及以上 ÷ 上一交易日涨停家数，须给基数与日期）");
+      if (!/升温|持平|退潮/.test(src)) bad(h + " 正文缺少情绪三态判断（规范 §04④：只能写 升温/持平/退潮 之一并给依据）");
+      if (!/封板率|炸板/.test(src)) bad(h + " 正文缺少封板率或炸板家数（规范 §04①：自算口径要写明，炸板池 getTopicZBPool 已可用）");
+      ok(h + " §04 涨跌停板结构五要素齐（广度/纵深/跌停侧/三态判断/封板率口径）");
+    }
     if (!/510300|588000|512890|159352|515450|510050|510500|512100|515180|510210/.test(src)) bad(h + " 正文缺少宽基 ETF 锚（规范 §02 要求写 ETF 全称＋代码＋跟踪指数，见 assets/fetch_etf_anchor.js）");
     const mDate = path.basename(h, ".html");
     if (!/^\d{4}-\d{2}-\d{2}$/.test(mDate)) bad(h + " 文件名必须是 YYYY-MM-DD.html");
