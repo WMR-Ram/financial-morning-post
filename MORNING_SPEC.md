@@ -60,7 +60,7 @@ MCP `today_investment_financial_data` 连接虽在但**返回 `40001 您无可�
 | 指数日线（收盘/成交额/区间涨跌） | `push2his.eastmoney.com/api/qt/stock/kline/get?secid=<sid>&klt=101&fqt=1&lmt=N&end=20500101&fields1=f1,f2,f3&fields2=f51,f53,f56,f57` | f51 日期、f53 收盘、f56 成交量、f57 成交额（元）；**返回含当日未完成的一根**，复盘只取已完成日 |
 | 板块日线 | 同上，`secid=90.BK0917` | 概念与行业都可取 |
 | 板块/指数逐日资金流 | `push2his.eastmoney.com/api/qt/stock/fflow/daykline/get?secid=90.BKxxxx`（用 `node assets/fetch_flow.js <日> <日> <代码…>`） | 列序 f52 主力、f53 小单、f54 中单、f55 大单、f56 超大单；恒等式 主力＝大单＋超大单；`identityCheck` 非 ok 或 EMPTY 就标未取证。**只有"主力净额"这一列可用于结论，分档明细只作参考** |
-| 涨停/跌停/炸板家数与连板高度 | `push2ex.eastmoney.com/getTopicZTPool`、`getTopicDTPool`、`getTopicZBPool`（`dpt=wz.ztzt`，需 UA；用 `node assets/fetch_limits.js` 一次取齐） | **`date` 参数被忽略，只返回最近一个交易日的池**：09:20 跑时它就是上一交易日，15:30 跑时是当天。涨停池字段 `lbc` 连板数、`zbc` 当日炸板次数、`zttj{days,ct}` N天M板、`hybk` 行业；跌停池字段 `days` 连续跌停天数、`hs` 换手、`amount` 成交额、`hybk` 行业。**炸板池 2026-11-16 实测可用**，封板率因此可自算（涨停÷(涨停＋炸板)），但要写明是自算口径。跌停池 `fund`/`fba`/`oc` 语义未核实，不得引用。只统计家数与行业分布，**不点名个股** |
+| 涨停/跌停/炸板家数与连板高度 | `push2ex.eastmoney.com/getTopicZTPool`、`getTopicDTPool`、`getTopicZBPool`（`dpt=wz.ztzt`，需 UA；用 `node assets/fetch_limits.js [YYYY-MM-DD]` 一次取齐） | **`date=YYYYMMDD` 生效（2026-11-16 实测更正）**：可逐日回取，周末与节假日返回 `tc:0` 空池，超出窗口（实测 11-06 可取、10-09 起为空）同样空。此前规范写"date 被忽略"是误判——`qdate` 恒等于最近交易日，不能拿来校验取到哪一天，而 11-12 与 11-13 涨停家数恰好都是 37 又加深了误会。涨停池字段 `lbc` 连板数、`zbc` 当日炸板次数、`zttj{days,ct}` N天M板、`hybk` 行业；跌停池字段 `days` 连续跌停天数、`hs` 换手、`amount` 成交额、`hybk` 行业。**炸板池 2026-11-16 实测可用**，封板率因此可自算（涨停÷(涨停＋炸板)），但要写明是自算口径。跌停池 `fund`/`fba`/`oc` 语义未核实，不得引用。只统计家数与行业分布，**不点名个股** |
 | 两融 | `datacenter-web.eastmoney.com/api/data/v1/get?reportName=RPTA_RZRQ_LSHJ&columns=ALL&sortColumns=DIM_DATE&sortTypes=-1&pageSize=5&pageNum=1&source=WEB&client=WEB`（带 `Referer: https://data.eastmoney.com/`） | RZYE 融资余额、RZMRE/RZCHE 买入与偿还；以 `DIM_DATE` 为披露日，滞后 1—2 个交易日 |
 | 资金面短端利率 | 中国货币网 `chinamoney.com.cn/ags/ms/cm-u-bk-shibor/ShiborHis?lang=cn&startDate=&endDate=` | SHIBOR O/N、1W、3M 可取；DR007 专属端点未跑通，须由央行公告或头部媒体旁证，核不到标 ⚠️ |
 | 基金净值与持仓 | `fund.eastmoney.com/pingzhongdata/<6位代码>.js`（带 `Referer: https://fund.eastmoney.com/`） | 539002、019018 均可；`Data_netWorthTrend` 为逐日净值，持仓变动权威口径仍是基金公司定期报告 |
@@ -146,7 +146,8 @@ MCP `today_investment_financial_data` 连接虽在但**返回 `40001 您无可�
   ④ **一句话情绪判断**（硬性）：只能选 `升温 / 持平 / 退潮` 之一，依据是广度×纵深×封板率×晋级率四个方向；
      四者指向不一致时以广度与纵深优先并**写出分歧**；随后给下一个交易日能看到的确证/证伪信号（例："涨停回到 60 家以上且梯队无断层"）。
      禁止把涨跌停家数写成买卖指令，禁止"亢奋/恐慌"这类无数据支撑的形容。
-  接口 `date` 参数被忽略：09:2x 跑时池即上一交易日完整值；**盘中或盘后补跑拿到的是当日进行中的快照，不得当作收盘值**（脚本会显式告警）。
+  `date=YYYYMMDD` 生效（2026-11-16 更正，旧规范记成"被忽略"）：09:20 那期**显式传上一交易日**取当日完整池，15:30 那期传当日；
+  未收盘时传当日只会拿到进行中的快照，**不得当作收盘值**（脚本会显式告警，空池则说明该日非交易日或超出可取窗口）。
 - `05 隔夜海外与外部信号` —— 美股三大＋纳指100（与纳指综合分开命名）、美债 10Y、美元指数与人民币、**富时中国A50 夜盘/新加坡隔夜**（给最新价与对上一交易日结算的涨跌，注明是夜盘连续口径）；
   **科技链外部锚单独成段**：费城半导体 `SOX`（东财 `251.SOX`）、纳斯达克中国金龙 `HXC`（`251.HXC`）、韩国KOSPI（`100.KS11`）、日经225（`100.N225`）的隔夜涨跌与一周位置，
   并且必须接到 §03 的国内链条——科创50 与 A500 的电子权重、539002 的台韩存储/代工暴露、019018 的 CPO/光模块暴露，分别对应哪一条外部线；
@@ -189,7 +190,9 @@ MCP `today_investment_financial_data` 连接虽在但**返回 `40001 您无可�
 2. 定上一交易日（kline 最后一根已完成日期）。
 3. 取数（§2）：指数日线与成交额、涨停池、两融、宽基 ETF 资金流、板块日线与资金流、SHIBOR/DR007、美债、A50、隔夜美股、515450 与 H30269 与 000922 的红利家族对比。
 4. 写 `data/<今日>.json`（`prev_trading_day`、`indices`、`dividend_family`、`flows`、`breadth`、`sectors`、`overnight`、`policy`、`scenarios`、`views`、`sources`、`pending_verification`）。
-5. 写 `daily/<今日>.html`：行情条 `<div class="ticker"><div class="track" id="ticker-strip"></div></div>` ＋紧随 `<div class="tickmeta"><span id="ticker-meta"></span></div>`；
+5. 写 `daily/<今日>.html`：**先 Write 骨架（≤6KB），再逐节 Edit 追加，单次工具入参 ≤8KB**——
+   周报 2026-11-16 就是因为一次性写整页被模型流式输出截断（`Model stream ended with unclosed content blocks`）连挂两次，早报页 60KB 也别赌一次写完。
+   页面内容：行情条 `<div class="ticker"><div class="track" id="ticker-strip"></div></div>` ＋紧随 `<div class="tickmeta"><span id="ticker-meta"></span></div>`；
    `FW_TICK` 每项带 `snapshot`，**必须包含 2.H30269、1.000510、1.000688、1.515450（标普红利低波50 代理）、104.CN00Y（A50，取不到则快照）**。
 6. **整体重建 `index.html`**。
 7. `node E:/financial-morning-post/assets/check.js E:/financial-morning-post` **不通过不许发布**。
