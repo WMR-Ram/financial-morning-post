@@ -68,6 +68,25 @@ for (const h of htmls) {
   for (const id of calls) if (!new RegExp('id="' + id + '"').test(src)) bad(h + " 脚本引用了不存在的容器 #" + id);
   if (h !== "index.html" && calls.length > 3) bad(h + ` 图表 ${calls.length} 张——早报最多 3 张，多了就不叫早报`);
 
+  /* 站际互链（2026-11-23 用户要求两站可互相跳转）：每一页的页头都要指向周报 */
+  if (!/financial-weekly\/">财经周报/.test(src)) bad(h + " 页头缺少指向财经周报的互链（规范 §3 站际互链）");
+
+  /* 归档卡片篇幅（2026-11-23 用户定口径：标题一句 ≤30 字，摘要四句 ≤200 字） */
+  if (h === "index.html") {
+    const cards = [...src.matchAll(/<a class="wk" href="daily\/(\d{4}-\d{2}-\d{2})\.html">([\s\S]*?)<\/a>/g)];
+    if (!cards.length) bad("index.html 没有解析到任何 .wk 卡片（结构变了要同步改 check.js）");
+    for (const c of cards) {
+      const title = (c[2].match(/<div class="t">([^<]*)<\/div>/) || [])[1] || "";
+      const desc = (c[2].match(/<div class="d">([\s\S]*?)<\/div>/) || [])[1] || "";
+      const dt = CJK(title), dd = CJK(desc.replace(/<[^>]+>/g, ""));
+      if (!title) bad(`归档卡片 ${c[1]} 没有 .t 标题`);
+      else if (dt > 30) bad(`归档卡片 ${c[1]} 标题 ${dt} 字 > 30（标题只写一句主题）`);
+      if (dd > 200) bad(`归档卡片 ${c[1]} 摘要 ${dd} 字 > 200（复盘／分析／政策／预测各一句，别把 §00 原文搬进来）`);
+      if (dd && dd < 60) bad(`归档卡片 ${c[1]} 摘要只有 ${dd} 字，四句没写全`);
+    }
+    if (cards.length) ok(`归档卡片 ${cards.length} 张，标题与摘要篇幅合规`);
+  }
+
   /* 行情条快照 */
   const tick = src.match(/window\.FW_TICK\s*=\s*(\[[\s\S]*?\]);/);
   if (tick) {
@@ -119,9 +138,13 @@ for (const h of htmls) {
 
   /* 篇幅闸门：早报的立身之本是短。只统计正文（来源节 <section id="src"> 之前）。
      v3（2026-11-06，加主线板块与今日主线预测）：1800—3400；含收盘验证区上限 3900。
-     v3.1（2026-11-16，§04 加涨跌停板结构）：1800—3600；含收盘验证区上限 4100。 */
+     v3.1（2026-11-16，§04 加涨跌停板结构）：1800—3600；含收盘验证区上限 4100。
+     v3.2（2026-11-23，加站际互链）：**页头 masthead、行情条与 tickmeta 属站点外壳，不计入正文字数**——
+       否则加一个"财经周报"链接就吃掉 4 个字，11-23 那次正是这样被顶到 3604 > 3600。 */
   if (h === newest) {
-    const bodyOnly = srcIdx >= 0 ? src.slice(0, srcIdx) : src;
+    const bodyOnly = (srcIdx >= 0 ? src.slice(0, srcIdx) : src)
+      .replace(/<header class="masthead">[\s\S]*?<\/header>/g, " ")
+      .replace(/<div class="ticker">[\s\S]*?<\/div>\s*<div class="tickmeta">[\s\S]*?<\/div>/g, " ");
     const plain = bodyOnly.replace(/<script[\s\S]*?<\/script>/g, " ").replace(/<style[\s\S]*?<\/style>/g, " ").replace(/<[^>]+>/g, " ");
     const chars = CJK(plain);
     const hasClose = /id="s-close"/.test(src);

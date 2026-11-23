@@ -23,9 +23,18 @@
 ## 1. 文件产物与命名
 
 1. `daily/<YYYY-MM-DD>.html` —— 当日页，文件名用**发布日（今日）**。
-2. `data/<YYYY-MM-DD>.json` —— 当日结构化快照。
+2. `data/<YYYY-MM-DD>.json` —— 当日结构化快照，**必须含 `archive_summary` 字段**（见下）。
 3. `index.html` —— 归档首页，扫描 `daily/` **整体重建**，按日期倒序；每期卡片标状态"盘前版"或"已收盘验证"，并更新构建时间戳。
-4. `assets/`（theme.css、ticker.js、chart.js、fetch_flow.js、check.js）已就位：**只许追加，禁止重写或改既有函数签名**。
+
+   **归档卡片篇幅（2026-11-23 用户定稿，check.js 硬卡）**：卡片文字一律取自 `data/<日期>.json` 的
+   `archive_summary = { title, lines[] }`，**`title` ≤30 字一句主题**，**`lines` 四句、合计 ≤200 字**，
+   顺序固定为 **复盘／分析／政策／预测**各一句（句首写这两个字，与 §00/§03/§06/§07 对应）。
+   禁止把 §00 今日三条原文、数字清单或待核项搬进卡片——2026-11-23 实测有卡片写到标题 620 字、摘要 4760 字，
+   归档页因此比正文还长，用户明确否掉。缺 `archive_summary` 时宁可现场补写四句，也不许整段复制正文。
+4. `assets/`（theme.css、ticker.js、chart.js、fetch_flow.js、fetch_limits.js、fetch_etf_anchor.js、check.js）已就位：**只许追加，禁止重写或改既有函数签名**。
+
+**站际互链（2026-11-23 用户要求）**：早报每一页（含 `index.html` 与所有 `daily/`）页头 `masthead` 的 `.stamp` 行末尾
+必须带 ` · <a href="https://wmr-ram.github.io/financial-weekly/">财经周报</a>`；周报页反向指向早报站。check.js 会逐页拦。
 
 每页必须带 `<meta name="robots" content="noindex,nofollow">`（页面含持仓信息）。
 
