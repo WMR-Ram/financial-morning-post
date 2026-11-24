@@ -28,7 +28,7 @@
   <div class="inner">
     <div class="brand">财经<span>早报</span></div>
     <div class="issue">每个交易日 09:20 盘前自动生成</div>
-    <div class="stamp">最近构建 <b>2026-11-24 09:2x（第 017 期盘前版）</b> · <a href="https://wmr-ram.github.io/financial-weekly/">财经周报</a></div>
+    <div class="stamp">最近构建 <b>2026-11-24 15:3x（第 017 期已收盘验证）</b> · <a href="https://wmr-ram.github.io/financial-weekly/">财经周报</a></div>
   </div>
 </header>
 
@@ -46,10 +46,10 @@
     <h2><span class="no">01</span>早报归档</h2>
     <div class="grid" style="gap:12px">
       <a class="wk" href="daily/2026-11-24.html">
-        <span class="id">2026-11-24 · 第 017 期 · 盘前版</span>
+        <span class="id">2026-11-24 · 第 017 期 · 已收盘验证</span>
         <div class="t">隔夜AI交易回摆，主线机器人遇政策底</div>
         <div class="d">复盘：11-23 涨停146／跌停3、净涨停转正，封板率85.88%（自算）、晋级率57.14%，判为升温；创业板涨3.08%而红利三锚齐跌。分析：机器人链涨幅资金涨停三项同向成主线；宽基ETF成交由977亿缩到508亿，前一日的托底式放量没有延续。政策：今晨央行净投放165亿元；11-22晚融资保证金比例下限降到80%、11-30生效，降费延长与创业板做市接续。预测：基准高开震荡、上证零到涨1%；候选主线机器人链，若开盘半小时主力净额转负则改看AI硬件修复链。</div>
-        <div class="row"><span>00 今日三条</span><span>02 当日 OMO 到手</span><span>03 主线四证据</span><span>04 涨跌停五要素</span><span>05 科技链外部锚</span><span>07 三情景与两条候选</span><span>08 持仓关联</span><span>09 观点并列</span></div>
+        <div class="row"><span>00 今日三条</span><span>02 当日 OMO 到手</span><span>03 主线四证据</span><span>04 涨跌停五要素</span><span>05 科技链外部锚</span><span>07 三情景与两条候选</span><span>08 持仓关联</span><span>09 观点并列</span><span>收盘验证</span></div>
       </a>
       <a class="wk" href="daily/2026-11-23.html">
         <span class="id">2026-11-23 · 第 016 期 · 已收盘验证</span>
@@ -157,18 +157,18 @@
 
 <script src="assets/js/ticker.js?v=2026-11-06e"></script>
 <script>
-/* 快照为 2026-11-23 A 股与外盘收盘（完成根）＋11-24 09:2x 盘前读数（A50／日韩／恒指为盘中未收盘值）；开盘后由 ticker.js 轮询覆盖为实时值 */
+/* 快照为 2026-11-24 A 股收盘完成根（push2his 15:3x）＋11-23 外盘收盘（美股 11-24 未开盘、A50 为连续口径快照）；开盘后由 ticker.js 轮询覆盖为实时值 */
 window.FW_TICK = [
-  {name:"上证",     em:"1.000001", tc:"sh000001", dec:2, snapshot:{price:3538.95, pct:0.15}},
-  {name:"深成",     em:"0.399001", tc:"sz399001", dec:2, snapshot:{price:10454.37, pct:1.93}},
-  {name:"沪深300",  em:"1.000300", tc:"sh000300", dec:2, snapshot:{price:3958.29, pct:0.09}},
-  {name:"中证A500", em:"1.000510", tc:"sh000510", dec:2, snapshot:{price:4719.52, pct:0.56}},
-  {name:"科创50",   em:"1.000688", tc:"sh000688", dec:2, snapshot:{price:1227.89, pct:-0.26}},
-  {name:"创业板",   em:"0.399006", tc:"sz399006", dec:2, snapshot:{price:2280.20, pct:3.08}},
-  {name:"中证红利", em:"1.000922", tc:"sh000922", dec:2, snapshot:{price:5492.17, pct:-0.68}},
-  {name:"红利低波", em:"2.H30269",               dec:2, snapshot:{price:11493.88, pct:-1.09}},
-  {name:"标普红利低波50", em:"1.515450",         dec:3, snapshot:{price:1.502, pct:-0.86}},
-  {name:"A50期指",  em:"104.CN00Y",              dec:2, snapshot:{price:12795.36, pct:1.16}},
+  {name:"上证",     em:"1.000001", tc:"sh000001", dec:2, snapshot:{price:3548.37, pct:0.27}},
+  {name:"深成",     em:"0.399001", tc:"sz399001", dec:2, snapshot:{price:10423.60, pct:-0.29}},
+  {name:"沪深300",  em:"1.000300", tc:"sh000300", dec:2, snapshot:{price:3963.82, pct:0.14}},
+  {name:"中证A500", em:"1.000510", tc:"sh000510", dec:2, snapshot:{price:4719.98, pct:0.01}},
+  {name:"科创50",   em:"1.000688", tc:"sh000688", dec:2, snapshot:{price:1250.09, pct:1.81}},
+  {name:"创业板",   em:"0.399006", tc:"sz399006", dec:2, snapshot:{price:2278.99, pct:-0.05}},
+  {name:"中证红利", em:"1.000922", tc:"sh000922", dec:2, snapshot:{price:5447.88, pct:-0.81}},
+  {name:"红利低波", em:"2.H30269",               dec:2, snapshot:{price:11447.24, pct:-0.41}},
+  {name:"标普红利低波50", em:"1.515450",         dec:3, snapshot:{price:1.505, pct:0.20}},
+  {name:"A50期指",  em:"104.CN00Y",              dec:2, snapshot:{price:12785.20, pct:1.08}},
   {name:"费城半导体", em:"251.SOX",              dec:2, snapshot:{price:9588.05, pct:14.03}},
   {name:"中国金龙", em:"251.HXC",                dec:2, snapshot:{price:5140.67, pct:2.44}},
   {name:"恒生",     em:"100.HSI",  tc:"hkHSI",   dec:2, snapshot:{price:22383.74, pct:null}},
