@@ -38,6 +38,11 @@
     var min = Math.min(a, b), max = Math.max(a, b), pad = (max - min) * 0.12 || 1;
     return [min - pad, max + pad];
   }
+  /* 红涨绿跌角标（2026-11-25 用户要求涨跌必须能一眼分辨）：
+     只在图表本身按正负/方向着色时画，避免"标了却没着色"的误导。 */
+  function rgMark(c) {
+    txt(c.svg, c.w - 6, c.h - 6, "红涨绿跌", { "text-anchor": "end", "font-size": c.fs - 1, fill: "#6d7a90" });
+  }
   /* 可用宽度：与 host() 用同一套兜底，避免"按 900 判定放得下、实际只有 320"的错判 */
   function availW(el) {
     var cw = Math.floor(el.getBoundingClientRect().width) || el.clientWidth ||
@@ -141,6 +146,7 @@
       });
       if (i) s("line", { x1: 2, x2: c.w - 2, y1: top, y2: top, stroke: "#141b28" }, c.svg);
     });
+    if (cfg.rg !== false) rgMark(c);
     return c;
   }
 
@@ -182,6 +188,7 @@
       var lb = txt(c.svg, cx, ly, cfg.labels[i], { "text-anchor": rotate ? "end" : "middle", "font-size": c.fs });
       if (rotate) lb.setAttribute("transform", "rotate(-36 " + cx + " " + ly + ")");
     });
+    if (!cfg.colors) rgMark(c);
     return c;
   }
 
@@ -190,7 +197,8 @@
     var gw = (cw - 62) / cfg.labels.length;
     if (cfg.horizontal || gw < 72) {
       var pal = cfg.series.map(function (sr) { return sr.color; });
-      return hBars(el, Object.assign({ maxBar: 12 }, cfg), cfg.labels.map(function (lb, i) {
+      /* 分组柱用的是系列色而不是正负色，所以不画"红涨绿跌"角标，免得标了却没着色 */
+      return hBars(el, Object.assign({ maxBar: 12, rg: false }, cfg), cfg.labels.map(function (lb, i) {
         return { label: lb, bars: cfg.series.map(function (sr, k) { return { v: sr.values[i], color: pal[k], name: sr.name }; }) };
       }));
     }
@@ -250,14 +258,27 @@
       txt(c.svg, P.l + 3, by - 5, "基准 " + cfg.baseline, { "font-size": c.fs - 1 });
     }
     cfg.series.forEach(function (sr) {
-      var d = sr.values.map(function (v, i) { return (i ? "L" : "M") + x(i).toFixed(1) + " " + y(v).toFixed(1); }).join(" ");
-      s("path", { d: d, fill: "none", stroke: sr.color, "stroke-width": sr.width || 2, "stroke-linejoin": "round" }, c.svg);
+      /* 单序列轨迹图改成"逐段按方向着色"（2026-11-25 用户要求涨跌可辨）；
+         多序列仍用系列色，否则五条线全变红绿会分不清是谁。 */
+      var byDir = cfg.series.length === 1;
       sr.values.forEach(function (v, i) {
-        var dot = s("circle", { cx: x(i), cy: y(v), r: c.narrow ? 3 : 2.6, fill: sr.color }, c.svg);
+        if (!i) return;
+        var pv = sr.values[i - 1];
+        s("line", {
+          x1: x(i - 1), y1: y(pv), x2: x(i), y2: y(v),
+          stroke: byDir ? (v >= pv ? UP : DOWN) : sr.color,
+          "stroke-width": sr.width || 2, "stroke-linecap": "round"
+        }, c.svg);
+      });
+      sr.values.forEach(function (v, i) {
+        var col = byDir ? (i ? (v >= sr.values[i - 1] ? UP : DOWN) : sr.color) : sr.color;
+        var dot = s("circle", { cx: x(i), cy: y(v), r: c.narrow ? 3 : 2.6, fill: col }, c.svg);
         s("title", {}, dot).textContent = sr.name + " " + ((cfg.xLabels || [])[i] || "") + " " + v.toFixed(cfg.digits === undefined ? 1 : cfg.digits);
       });
-      txt(c.svg, x(n - 1) + 4, y(sr.values[n - 1]) + 3, sr.name.slice(0, c.narrow ? 4 : 8),
-        { fill: sr.color, "font-size": c.fs - 1, "font-weight": 700 });
+      var last = sr.values[n - 1], prev = sr.values[n - 2];
+      txt(c.svg, x(n - 1) + 4, y(last) + 3, sr.name.slice(0, c.narrow ? 4 : 8),
+        { fill: byDir && n > 1 ? (last >= prev ? UP : DOWN) : sr.color, "font-size": c.fs - 1, "font-weight": 700 });
+      if (byDir) rgMark(c);
     });
     return c;
   }

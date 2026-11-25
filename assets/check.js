@@ -153,22 +153,58 @@ for (const h of htmls) {
     else if (chars < 1500) bad(`${h} 正文只有 ${chars} 个中文字，疑似未取到数据就成稿（下限 1500）`);
     else ok(`${h} 正文 ${chars} 字${hasClose ? "（含收盘验证区）" : "（盘前版）"}，符合篇幅 ${cap}`);
 
-    /* 必备小节锚点：复盘 s1、走势推演 s7 */
-    for (const id of ["s1", "s7"]) if (!new RegExp('id="' + id + '"').test(src)) bad(h + ` 缺少必备小节 id="${id}"（01 复盘、07 今日走势推演）`);
+    /* 必备小节锚点：复盘 s1；走势推演 2026-11-26 起前移为 s3（此前是 s7） */
+    const anchorIds = path.basename(h, ".html") >= "2026-11-26" ? ["s1", "s3"] : ["s1", "s7"];
+    for (const id of anchorIds) if (!new RegExp('id="' + id + '"').test(src)) bad(h + ` 缺少必备小节 id="${id}"（01 复盘、${id === "s3" ? "03" : "07"} 今日走势推演）`);
     /* 用户 2026-11-06 新增的两块内容，缺了就是漏写 */
-    if (!/主线/.test(src)) bad(h + " 正文缺少主线板块（§03 上一交易日主线四证据、§07 今日主线候选与证伪信号）");
+    if (!/主线/.test(src)) bad(h + " 正文缺少主线板块（§05 上一交易日主线四证据、§03 今日主线候选与证伪信号）");
     /* 用户 2026-11-16 新增：§04 涨跌停板结构分析，缺任一块就是漏写。
        只对 2026-11-17（含）之后的期数生效——今天已发布的盘前版是按旧规范写的，
        不能让新闸门把当日 15:30 的收盘验证区卡住。 */
     if (path.basename(h, ".html") >= "2026-11-17") {
-      if (!/跌停/.test(src)) bad(h + " 正文缺少跌停侧（规范 §04③：跌停家数、连续跌停家数、跌停行业分布）");
-      if (!/连板|梯队/.test(src)) bad(h + " 正文缺少连板梯队（规范 §04②：最高连板与首板/2板/3板及以上分布）");
-      if (!/晋级率/.test(src)) bad(h + " 正文缺少晋级率（规范 §04②：当日 2 板及以上 ÷ 上一交易日涨停家数，须给基数与日期）");
-      if (!/升温|持平|退潮/.test(src)) bad(h + " 正文缺少情绪三态判断（规范 §04④：只能写 升温/持平/退潮 之一并给依据）");
-      if (!/封板率|炸板/.test(src)) bad(h + " 正文缺少封板率或炸板家数（规范 §04①：自算口径要写明，炸板池 getTopicZBPool 已可用）");
-      ok(h + " §04 涨跌停板结构五要素齐（广度/纵深/跌停侧/三态判断/封板率口径）");
+      if (!/跌停/.test(src)) bad(h + " 正文缺少跌停侧（规范 §06③：跌停家数、连续跌停家数、跌停行业分布）");
+      if (!/连板|梯队/.test(src)) bad(h + " 正文缺少连板梯队（规范 §06②：最高连板与首板/2板/3板及以上分布）");
+      if (!/晋级率/.test(src)) bad(h + " 正文缺少晋级率（规范 §06②：当日 2 板及以上 ÷ 上一交易日涨停家数，须给基数与日期）");
+      if (!/升温|持平|退潮/.test(src)) bad(h + " 正文缺少情绪三态判断（规范 §06④：只能写 升温/持平/退潮 之一并给依据）");
+      if (!/封板率|炸板/.test(src)) bad(h + " 正文缺少封板率或炸板家数（规范 §06①：自算口径要写明，炸板池 getTopicZBPool 已可用）");
+      ok(h + " §06 涨跌停板结构五要素齐（广度/纵深/跌停侧/三态判断/封板率口径）");
     }
-    if (!/510300|588000|512890|159352|515450|510050|510500|512100|515180|510210/.test(src)) bad(h + " 正文缺少宽基 ETF 锚（规范 §02 要求写 ETF 全称＋代码＋跟踪指数，见 assets/fetch_etf_anchor.js）");
+
+    /* 用户 2026-11-25 要求内容大改：先给观点与结论，数据只能当支撑；涨跌要红绿可辨。
+       只对 2026-11-26（含）之后的期数生效——已发布期数保持原样，可证伪性优先。 */
+    if (path.basename(h, ".html") >= "2026-11-26") {
+      const NUM = /[+\-−]?\d[\d.,]*/g;
+      const secs = [...src.matchAll(/<section id="(s\d)">([\s\S]*?)<\/section>/g)];
+      if (secs.length < 10) bad(h + ` 只解析到 ${secs.length} 个 s* 小节，十一节结构不完整`);
+      const verdicts = [];
+      let dense = 0;
+      for (const m of secs) {
+        const id = m[1], inner = m[2].replace(/<h2>[\s\S]*?<\/h2>/, "");
+        const v = inner.match(/<(p|div|ul)[^>]*class="[^"]*verdict[^"]*"[\s\S]*?(<\/p>|<\/div>|<\/ul>)/);
+        if (!v) { bad(`${h} §${id} 没有以 class="verdict" 的结论句开头（规范 §3：先判断后数据）`); continue; }
+        const vt = v[0].replace(/<[^>]+>/g, " ");
+        const vn = (vt.match(NUM) || []).length;
+        if (vn > 2) bad(`${h} §${id} 结论句里有 ${vn} 个数值，超过 2 个——结论要先能读懂，数字挪到后面的支撑段`);
+        verdicts.push(vt);
+        const noTab = m[2].replace(/<table[\s\S]*?<\/table>/g, " ").replace(/<[^>]+>/g, " ");
+        const nn = (noTab.match(NUM) || []).length, nc = CJK(noTab);
+        const per100 = nn * 100 / Math.max(1, nc);
+        const lim = id === "s0" ? 6 : 10;
+        if (per100 > lim) { dense++; bad(`${h} §${id} 每百中文字含 ${per100.toFixed(1)} 个数值，超过上限 ${lim}——把数字搬进表格或删掉，不能整版数据让用户自己分析`); }
+      }
+      const allV = verdicts.join(" ");
+      if (allV && !/涨停集中在/.test(allV)) bad(h + " 结论句没写\"涨停集中在××行业\"（用户 2026-11-25 明确说读不出涨跌停集中于哪个板块）");
+      if (allV && !/跌停(集中在|仅|无)/.test(allV)) bad(h + " 结论句没交代跌停集中在哪、或只是零星几家");
+      /* 涨跌着色：表格里带符号的百分比/亿元单元格必须有 up/down 类，正文结论句里的涨跌数字要包 b.up/b.down */
+      let uncolored = 0;
+      for (const td of src.matchAll(/<td([^>]*)>([^<]{1,24})<\/td>/g)) {
+        if (!/[+\-−]\d[\d.,]*\s*(?:%|亿|亿元|bp|个基点)/.test(td[2])) continue;
+        if (!/\b(up|down)\b/.test(td[1])) uncolored++;
+      }
+      if (uncolored > 3) bad(h + ` 表格里有 ${uncolored} 个带符号涨跌单元格没加 class="up|down"（红涨绿跌，用户 2026-11-25 要求）`);
+      if (!dense) ok(h + " 结论先行：每节 verdict 齐、涨跌停集中度已写明、数值密度与涨跌着色合规");
+    }
+    if (!/510300|588000|512890|159352|515450|510050|510500|512100|515180|510210/.test(src)) bad(h + " 正文缺少宽基 ETF 锚（规范 §04 要求写 ETF 全称＋代码＋跟踪指数，见 assets/fetch_etf_anchor.js）");
     const mDate = path.basename(h, ".html");
     if (!/^\d{4}-\d{2}-\d{2}$/.test(mDate)) bad(h + " 文件名必须是 YYYY-MM-DD.html");
     else if (!src.includes(mDate)) bad(h + ` 页面正文没有出现文件名日期 ${mDate}，日期与内容可能对不上`);
