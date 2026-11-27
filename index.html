@@ -28,7 +28,7 @@
   <div class="inner">
     <div class="brand">财经<span>早报</span></div>
     <div class="issue">每个交易日 09:20 盘前自动生成</div>
-    <div class="stamp">最近构建 <b>2026-11-27 09:2x（第 020 期盘前版）</b> · <a href="https://wmr-ram.github.io/financial-weekly/">财经周报</a></div>
+    <div class="stamp">最近构建 <b>2026-11-27 15:3x（第 020 期已收盘验证）</b> · <a href="https://wmr-ram.github.io/financial-weekly/">财经周报</a></div>
   </div>
 </header>
 
@@ -46,10 +46,10 @@
     <h2><span class="no">01</span>早报归档</h2>
     <div class="grid" style="gap:12px">
       <a class="wk" href="daily/2026-11-27.html">
-        <span class="id">2026-11-27 · 第 020 期 · 盘前版</span>
+        <span class="id">2026-11-27 · 第 020 期 · 已收盘验证</span>
         <div class="t">缩量窄幅修复日：广度回暖、纵深未复</div>
         <div class="d">复盘：11-26 沪指微涨守住 3477，两市缩至 1.32 万亿，红利与煤炭领涨、科创独绿，是一次没有主线的修复。分析：涨停 65 家分散在 33 个行业、单行业不超 5 家，跌停只剩 5 家，广度修复但 2 板梯队断层，情绪只算持平。政策：美 301 拟对 14 个经济体加税、细则未出，今晨央行隔夜投放放大到 7940 亿续作呵护。预测：今晨 A50 与美股期货同涨、日韩续涨，倾向基准偏乐观的温和修复，风险在 301 细则与成长不跟涨。</div>
-        <div class="row"><span>00 今日三条</span><span>02 当日 OMO 到手</span><span>03 三情景与三条候选</span><span>04 ETF 锚探针</span><span>05 主线四证据缺②④</span><span>06 涨跌停五要素</span><span>07 科技链外部锚</span><span>09 多空并列</span></div>
+        <div class="row"><span>00 今日三条</span><span>02 当日 OMO 到手</span><span>03 三情景与三条候选</span><span>04 ETF 锚探针</span><span>05 主线四证据缺②④</span><span>06 涨跌停五要素</span><span>07 科技链外部锚</span><span>09 多空并列</span><span>收盘验证</span></div>
       </a>
       <a class="wk" href="daily/2026-11-26.html">
         <span class="id">2026-11-26 · 第 019 期 · 已收盘验证</span>
@@ -175,26 +175,26 @@
 
 <script src="assets/js/ticker.js?v=2026-11-25a"></script>
 <script>
-/* 快照为 2026-11-24 A 股收盘完成根（push2his 15:3x）＋11-23 外盘收盘（美股 11-24 未开盘、A50 为连续口径快照）；开盘后由 ticker.js 轮询覆盖为实时值 */
+/* 快照为 2026-11-27 A 股与日韩港收盘完成根（push2his 15:3x）＋美股 11-25 收盘（11-26 感恩节休市）；A50 为连续口径快照，开盘后由 ticker.js 轮询覆盖 */
 window.FW_TICK = [
-  {name:"上证",     em:"1.000001", tc:"sh000001", dec:2, snapshot:{price:3476.47, pct:-2.03}},
-  {name:"深成",     em:"0.399001", tc:"sz399001", dec:2, snapshot:{price:10086.36, pct:-3.24}},
-  {name:"沪深300",  em:"1.000300", tc:"sh000300", dec:2, snapshot:{price:3898.24, pct:-1.65}},
-  {name:"中证A500", em:"1.000510", tc:"sh000510", dec:2, snapshot:{price:4618.72, pct:-2.15}},
-  {name:"科创50",   em:"1.000688", tc:"sh000688", dec:2, snapshot:{price:1186.14, pct:-5.12}},
-  {name:"创业板",   em:"0.399006", tc:"sz399006", dec:2, snapshot:{price:2183.58, pct:-4.18}},
-  {name:"中证红利", em:"1.000922", tc:"sh000922", dec:2, snapshot:{price:5423.75, pct:-0.44}},
-  {name:"红利低波", em:"2.H30269",               dec:2, snapshot:{price:11421.83, pct:-0.22}},
-  {name:"标普红利低波50", em:"1.515450",         dec:3, snapshot:{price:1.511, pct:0.40}},
-  {name:"A50期指",  em:"104.CN00Y",              dec:2, snapshot:{price:12564.52, pct:0.88}},
+  {name:"上证",     em:"1.000001", tc:"sh000001", dec:2, snapshot:{price:3606.49, pct:3.73}},
+  {name:"深成",     em:"0.399001", tc:"sz399001", dec:2, snapshot:{price:10814.02, pct:7.24}},
+  {name:"沪深300",  em:"1.000300", tc:"sh000300", dec:2, snapshot:{price:4063.06, pct:4.17}},
+  {name:"中证A500", em:"1.000510", tc:"sh000510", dec:2, snapshot:{price:4853.29, pct:5.16}},
+  {name:"科创50",   em:"1.000688", tc:"sh000688", dec:2, snapshot:{price:1346.25, pct:15.07}},
+  {name:"创业板",   em:"0.399006", tc:"sz399006", dec:2, snapshot:{price:2443.96, pct:11.61}},
+  {name:"中证红利", em:"1.000922", tc:"sh000922", dec:2, snapshot:{price:5483.72, pct:0.07}},
+  {name:"红利低波", em:"2.H30269",               dec:2, snapshot:{price:11396.41, pct:-0.96}},
+  {name:"标普红利低波50", em:"1.515450",         dec:3, snapshot:{price:1.499, pct:-0.86}},
+  {name:"A50期指",  em:"104.CN00Y",              dec:2, snapshot:{price:13058.38, pct:4.36}},
   {name:"半导体ETF",em:"251.SOX",  tc:"usSMH",   dec:2, snapshot:{price:422.46, pct:-1.01}},
-  {name:"恒生",     em:"100.HSI",  tc:"hkHSI",   dec:2, snapshot:{price:22234.89, pct:1.22}},
+  {name:"恒生",     em:"100.HSI",  tc:"hkHSI",   dec:2, snapshot:{price:22660.49, pct:1.95}},
   {name:"纳指100",  tc:"usNDX",                  dec:2, snapshot:{price:26046.90, pct:-0.64}},
   {name:"纳指综合", tc:"usIXIC",                 dec:2, snapshot:{price:23585.80, pct:-0.62}},
   {name:"标普500",  em:"100.SPX",  tc:"usINX",   dec:2, snapshot:{price:7182.78, pct:-0.25}},
   {name:"道指",     tc:"usDJI",                  dec:2, snapshot:{price:50182.95, pct:0.33}},
-  {name:"韩国KOSPI", em:"100.KS11",              dec:2, snapshot:{price:4791.49, pct:2.0}},
-  {name:"日经225",   em:"100.N225",              dec:2, snapshot:{price:58152.63, pct:2.0}}
+  {name:"韩国KOSPI", em:"100.KS11",              dec:2, snapshot:{price:4915.68, pct:4.34}},
+  {name:"日经225",   em:"100.N225",              dec:2, snapshot:{price:58711.11, pct:2.11}}
 ];
 </script>
 </body>
